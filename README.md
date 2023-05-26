@@ -11,6 +11,71 @@
 
 ## User-agent Keywords commented out:
 ```
+- Alligator
+- Anarchie
+- Anarchy
+- Attach
+
+- BackStreet
+- BackWeb
+- Badass
+- Bandit
+- Bigfoot
+- Blow
+- Bolt
+- Buck
+- Buddy
+- Bullseye
+
+- Collector
+- Copier
+- Cosmos
+- Crescent
+- Curious
+- Custo
+
+- Demon
+- Devil
+- Disco
+- Dragonfly
+- Drip
+
+- Evil
+- FrontPage
+- Fuzz
+
+- Harvest
+- Leap
+- Mojeek
+
+- Needle
+- Nibbler
+- Ninja
+
+- Octopus
+- Pump
+
+- Reaper
+- Ripper
+
+- Screaming
+- Snake
+- Snoopy
+- Steeler
+- Stripper
+- Sucker
+
+- Teleport
+- TheNomad
+- Titan
+- Twice
+
+- Webster
+- Whack
+- Whacker
+- Widow
+- Xenu
+- Zeus
 ```
 
 ## Updater script:
