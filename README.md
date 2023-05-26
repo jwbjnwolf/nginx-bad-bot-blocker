@@ -3,10 +3,12 @@
 
 ## Problem:
 - The `deny.conf` behavior of blocking dot file/folder requests doesn't exclude `.well-known`, that fedi software needs to crawl to federate properly.
+- The `deny.conf` behavior also blocks image hotlinking, which breaks fedi software.
 - The `globalblacklist.conf` user-agent blocklist includes a lot of keywords that are, or may, be part of many fedi instance domains, which are included in user-agents by said software when they crawl other instances, causing instances to be falsely blocked.
 
 ## Changes:
 - In `deny.conf`, add an exclusion for `.well-known` requests: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/bbc4b2f13b69132e055ab87c30cef82119d7903a).
+- In `deny.conf`, comment out the image hotlinking section so hostlinking isn't prevented: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/7f80200a183cf2cd72180be381032c23940eb724).
 - In `globalblacklist.conf`, comment out problem user-agent keyword blocks so they don't cause false positives: See below for list.
 
 ## User-agent Keywords commented out:
