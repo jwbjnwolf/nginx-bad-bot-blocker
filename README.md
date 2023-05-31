@@ -45,9 +45,12 @@
 - Evil
 - FrontPage
 - Fuzz
+- Gopher
 
 - Harvest
 - Leap
+
+- Magnet
 - Mojeek
 
 - Needle
@@ -59,14 +62,17 @@
 
 - Reaper
 - Ripper
+- Ripz
 
 - Screaming
 - Snake
 - Snoopy
+- Spanner
 - Steeler
 - Stripper
 - Sucker
 
+- TakeOut
 - Teleport
 - TheNomad
 - Titan
@@ -77,6 +83,7 @@
 - Whacker
 - Widow
 - Xenu
+- Zade
 - Zeus
 ```
 
