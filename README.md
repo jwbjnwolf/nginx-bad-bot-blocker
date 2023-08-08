@@ -58,6 +58,7 @@
 - Ninja
 
 - Octopus
+- Obot
 - Pump
 
 - Reaper
