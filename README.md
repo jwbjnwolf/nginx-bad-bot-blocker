@@ -48,6 +48,8 @@
 - Gopher
 
 - Harvest
+- Iria
+- Kinza
 - Leap
 
 - Magnet
