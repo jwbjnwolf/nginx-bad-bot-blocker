@@ -13,82 +13,82 @@
 
 ## User-agent Keywords commented out:
 ```
-- Alligator
-- Anarchie
-- Anarchy
-- Attach
+- Alligator,
+- Anarchie,
+- Anarchy,
+- Attach,
 
-- BackStreet
-- BackWeb
-- Badass
-- Bandit
-- Bigfoot
-- Blow
-- Bolt
-- Buck
-- Buddy
-- Bullseye
+- BackStreet,
+- BackWeb,
+- Badass,
+- Bandit,
+- Bigfoot,
+- Blow,
+- Bolt,
+- Buck,
+- Buddy,
+- Bullseye,
 
-- Collector
-- Copier
-- Cosmos
-- Crescent
-- Curious
-- Custo
+- Collector,
+- Copier,
+- Cosmos,
+- Crescent,
+- Curious,
+- Custo,
 
-- Demon
-- Devil
-- Disco
-- Dragonfly
-- Drip
+- Demon,
+- Devil,
+- Disco,
+- Dragonfly,
+- Drip,
 
-- Evil
-- FrontPage
-- Fuzz
-- Gopher
+- Evil,
+- FrontPage,
+- Fuzz,
+- Gopher,
 
-- Harvest
-- Iria
-- Kinza
-- Leap
+- Harvest,
+- Iria,
+- Kinza,
+- Leap,
 
-- Magnet
-- Mojeek
+- Magnet,
+- Mojeek,
 
-- Needle
-- Nibbler
-- Ninja
+- Needle,
+- Nibbler,
+- Ninja,
 
-- Octopus
-- Obot
-- Pump
+- Octopus,
+- Obot,
+- Pump,
 
-- Reaper
-- Ripper
-- Ripz
+- Reaper,
+- Ripper,
+- Ripz,
 
-- Screaming
-- Snake
-- Snoopy
-- Spanner
-- Steeler
-- Stripper
-- Sucker
+- Screaming,
+- Snake,
+- Snoopy,
+- Spanner,
+- Steeler,
+- Stripper,
+- Sucker,
 
-- TakeOut
-- Teleport
-- TheNomad
-- Titan
-- Twice
+- TakeOut,
+- Teleport,
+- TheNomad,
+- Titan,
+- Twice,
 
-- Webster
-- Whack
-- Whacker
-- Widow
-- Xenu
-- Zade
-- Zeus
+- Webster,
+- Whack,
+- Whacker,
+- Widow,
+- Xenu,
+- Zade,
+- Zeus.
 ```
 
 ## Updater script:
-- Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/b083e4af2faed92fa14b02c7a64126f739557893)
+- Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/b083e4af2faed92fa14b02c7a64126f739557893).
