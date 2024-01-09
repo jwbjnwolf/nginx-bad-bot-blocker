@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Script to find and comment out tor exit nodes in the blocklist.
+# cd to the nginx-bad-bot-blocker directory & run with `./find-tor-exits`.
+
+cd conf.d
+wget 'https://raw.githubusercontent.com/SecOps-Institute/Tor-IP-Addresses/master/tor-exit-nodes.lst'
+
+while read line
+do
+    sed -i -e "s/^\t*$line\t*1;$/#\t$line\t\t1;/g" globalblacklist.conf
+    grep $line globalblacklist.conf
+done < tor-exit-nodes.lst
+
+rm tor-exit-nodes.lst globalblacklist.conf-e
