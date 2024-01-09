@@ -10,8 +10,9 @@
 - In `deny.conf`, add an exclusion for `.well-known` requests: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/bbc4b2f13b69132e055ab87c30cef82119d7903a).
 - In `deny.conf`, comment out the image hotlinking section so hotlinking isn't prevented: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/7f80200a183cf2cd72180be381032c23940eb724).
 - In `globalblacklist.conf`, comment out problem user-agent keyword blocks so they don't cause false positives: See below for list.
-- In `globalblacklist.conf'`, changed the very not good bot "AdsBot-Google" to be blocked. ADs can get in the damn bin.
-- In `globalblacklist.conf'`, added some AI crawler bots to be blocked that aren't currently present.
+- In `globalblacklist.conf`, changed the very not good bot "AdsBot-Google" to be blocked. ADs can get in the damn bin.
+- In `globalblacklist.conf`, added some AI crawler bots to be blocked that aren't currently present.
+- Added a bash script to routinely comment out Tor exit node IPs in `globalblacklist.conf` when I sync from upstream.
 
 ## User-agent Keywords commented out:
 ```
