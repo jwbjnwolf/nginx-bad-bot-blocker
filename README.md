@@ -100,9 +100,6 @@
 
 ## Added user agents to be blocked:
 ```
-- ChatGPT-User,
-- Google-Extended,
-- FacebookBot,
 - Omgilibot,
 - WellKnownBot.
 ```
