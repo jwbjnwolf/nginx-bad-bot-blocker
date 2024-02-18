@@ -6,9 +6,15 @@
 cd conf.d
 wget 'https://raw.githubusercontent.com/SecOps-Institute/Tor-IP-Addresses/master/tor-exit-nodes.lst'
 
+echo "Running sed.."
 while read line
 do
     sed -i -e "s/^\t*$line\t*1;$/#\t$line\t\t1;/g" globalblacklist.conf
+done < tor-exit-nodes.lst
+
+echo "Running grep.."
+while read line
+do
     grep $line globalblacklist.conf
 done < tor-exit-nodes.lst
 
