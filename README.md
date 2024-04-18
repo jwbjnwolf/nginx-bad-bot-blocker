@@ -91,6 +91,7 @@
 - Whacker,
 - Widow,
 - Xenu,
+- Yak,
 - Zade,
 - Zeus.
 ```
