@@ -1,4 +1,8 @@
 ## Nginx Bad Bot and User-Agent Blocker, customised for fedi instances.
+
+* Codeberg Mirror: https://codeberg.org/jasewolf/nginx-bad-bot-blocker-mirror.
+* Forked from: https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker.
+
 #### The default configuration for this blocker interferes with fedi software, such as Mastodon/GoToSocial from federating correctly.
 #### It also blocks a lot of Tor exit nodes as a result of them getting caught up in bad traffic.
 
@@ -9,12 +13,18 @@
 - Many tor exit node IPs get caught up in bad traffic, reported to AbuseIPDB in overwhelming numbers and end up in the `globalblacklist.conf` list as a result. There's only a finite amount of these nodes so even one block can be very noticable as a Tor user, and needing to refresh the exit node as a result, which isn't optimal.
 
 ## Changes:
-- In `deny.conf`, add an exclusion for `.well-known` requests: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/bbc4b2f13b69132e055ab87c30cef82119d7903a).
-- In `deny.conf`, comment out the image hotlinking section so hotlinking isn't prevented: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/7f80200a183cf2cd72180be381032c23940eb724).
+- In `deny.conf`, add an exclusion for `.well-known` requests: [Edits](../../../commit/e135d4ff9a6ab049f3c07a0c4213c088f2c7328a).
+- In `deny.conf`, comment out the image hotlinking section so hotlinking isn't prevented: [Edits](../../../commit/b6534f1acaedfbf11115132e332975a2096d5430).
 - In `globalblacklist.conf`, comment out problem user-agent keyword blocks so they don't cause false positives: See below for list.
 - In `globalblacklist.conf`, changed the very not good bot "AdsBot-Google" to be blocked. ADs can get in the damn bin.
 - In `globalblacklist.conf`, added some AI crawler bots to be blocked that aren't currently present.
 - Added a bash script to routinely comment out Tor exit node IPs in `globalblacklist.conf` when I sync from upstream.
+
+## How to use this fork instead of upstream
+- Follow instructions for installing files from the [upstream repo](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/blob/master/MANUAL-CONFIGURATION.md).
+- Edit your `deny.conf` file with the changes provided in these two commits as also stated above: [Commit 1](../../../commit/e135d4ff9a6ab049f3c07a0c4213c088f2c7328a), [Commit 2](../../../commit/b6534f1acaedfbf11115132e332975a2096d5430).
+- Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/0aac4922c377fb8d0f4524af3e804bc7c5600262).
+- Alternatively, point your updater script to the configuration hosted on my Codeberg mirror: [Edits](../../../commit/b26463c986606af377bda6aee56cb2c4a281564f).
 
 ## User-agent Keywords commented out:
 ```
@@ -107,6 +117,3 @@
 - Omgilibot,
 - WellKnownBot.
 ```
-
-## Updater script:
-- Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/b083e4af2faed92fa14b02c7a64126f739557893).
