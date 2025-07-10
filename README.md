@@ -1,4 +1,10 @@
-## Nginx Bad Bot and User-Agent Blocker, customised for fedi instances.
+## Nginx Bad Bot and User-Agent Blocker, customised for fedi instances, and made more tor friendly.
+
+* Hosted with Forgejo: https://git.wolfi.ee/jase/nginx-bad-bot-blocker.
+* Codeberg Mirror: https://codeberg.org/jasewolf/nginx-bad-bot-blocker-mirror.
+* Forked from: https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker.
+* Also mirrored on [Github](https://github.com/jwbjnwolf/nginx-bad-bot-blocker), but please github users of this fork, migrate to using either Codeberg or Forgejo.
+
 #### The default configuration for this blocker interferes with fedi software, such as Mastodon/GoToSocial from federating correctly.
 #### It also blocks a lot of Tor exit nodes as a result of them getting caught up in bad traffic.
 
@@ -9,12 +15,21 @@
 - Many tor exit node IPs get caught up in bad traffic, reported to AbuseIPDB in overwhelming numbers and end up in the `globalblacklist.conf` list as a result. There's only a finite amount of these nodes so even one block can be very noticable as a Tor user, and needing to refresh the exit node as a result, which isn't optimal.
 
 ## Changes:
-- In `deny.conf`, add an exclusion for `.well-known` requests: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/bbc4b2f13b69132e055ab87c30cef82119d7903a).
-- In `deny.conf`, comment out the image hotlinking section so hotlinking isn't prevented: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/7f80200a183cf2cd72180be381032c23940eb724).
+- In `deny.conf`, add an exclusion for `.well-known` requests: [Edits](../../../commit/d3459217f2394ac9ed50d1fcac0cd7b323637c7f).
+- In `deny.conf`, comment out the image hotlinking section so hotlinking isn't prevented: [Edits](../../../commit/13b8798f04dfffd58d9d22224b7ec3e660398da5).
 - In `globalblacklist.conf`, comment out problem user-agent keyword blocks so they don't cause false positives: See below for list.
 - In `globalblacklist.conf`, changed the very not good bot "AdsBot-Google" to be blocked. ADs can get in the damn bin.
 - In `globalblacklist.conf`, added some AI crawler bots to be blocked that aren't currently present.
 - Added a bash script to routinely comment out Tor exit node IPs in `globalblacklist.conf` when I sync from upstream.
+
+## How to use this fork instead of upstream:
+- Follow instructions for installing files from the [upstream repo](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/blob/master/MANUAL-CONFIGURATION.md).
+- Edit your `deny.conf` file with the changes provided in these two commits as also stated above: [Commit 1](../../../commit/d3459217f2394ac9ed50d1fcac0cd7b323637c7f), [Commit 2](../../../commit/13b8798f04dfffd58d9d22224b7ec3e660398da5).
+- Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/cc16f568bf61b14d1ce0080fe4635595cd1d9a4c).
+- Alternatively, point your updater script to the configuration hosted on my Codeberg mirror: [Edits](../../../commit/bf87f7c276cdf4801b54fc2afa606e971ccf4ac4).
+
+## Important note for self hosted Git repos such as if you use Forgejo like I now do:
+- Please ensure you do not include the `deny.conf` files in any server blocks or location blocks for git repositories such as Forgejo to ensure the repos function as intended. Using it with a git repo that has dotfiles for example will result in the dot files in the repo being inaccessible.
 
 ## User-agent Keywords commented out:
 ```
@@ -107,6 +122,3 @@
 - Omgilibot,
 - WellKnownBot.
 ```
-
-## Updater script:
-- Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](https://github.com/jwbjnwolf/nginx-bad-bot-blocker/commit/b083e4af2faed92fa14b02c7a64126f739557893).
