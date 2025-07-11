@@ -1,7 +1,9 @@
-## Nginx Bad Bot and User-Agent Blocker, customised for fedi instances.
+## Nginx Bad Bot and User-Agent Blocker, customised for fedi instances, and made more tor friendly.
 
+* Hosted with Forgejo: https://git.wolfi.ee/jase/nginx-bad-bot-blocker.
 * Codeberg Mirror: https://codeberg.org/jasewolf/nginx-bad-bot-blocker-mirror.
 * Forked from: https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker.
+* Also mirrored on [Github](https://github.com/jwbjnwolf/nginx-bad-bot-blocker), but please github users of this fork, migrate to using either Codeberg or Forgejo.
 
 #### The default configuration for this blocker interferes with fedi software, such as Mastodon/GoToSocial from federating correctly.
 #### It also blocks a lot of Tor exit nodes as a result of them getting caught up in bad traffic.
