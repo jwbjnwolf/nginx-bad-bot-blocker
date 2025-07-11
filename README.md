@@ -22,7 +22,7 @@
 - In `globalblacklist.conf`, added some AI crawler bots to be blocked that aren't currently present.
 - Added a bash script to routinely comment out Tor exit node IPs in `globalblacklist.conf` when I sync from upstream.
 
-## How to use this fork instead of upstream
+## How to use this fork instead of upstream:
 - Follow instructions for installing files from the [upstream repo](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/blob/master/MANUAL-CONFIGURATION.md).
 - Edit your `deny.conf` file with the changes provided in these two commits as also stated above: [Commit 1](../../../commit/e135d4ff9a6ab049f3c07a0c4213c088f2c7328a), [Commit 2](../../../commit/b6534f1acaedfbf11115132e332975a2096d5430).
 - Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/0aac4922c377fb8d0f4524af3e804bc7c5600262).
