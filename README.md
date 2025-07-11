@@ -28,6 +28,9 @@
 - Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/0aac4922c377fb8d0f4524af3e804bc7c5600262).
 - Alternatively, point your updater script to the configuration hosted on my Codeberg mirror: [Edits](../../../commit/b26463c986606af377bda6aee56cb2c4a281564f).
 
+## Important note for self hosted Git repos such as if you use Forgejo like I now do:
+- Please ensure you do not include the `deny.conf` files in any server blocks or location blocks for git repositories such as Forgejo to ensure the repos function as intended. Using it with a git repo that has dotfiles for example will result in the dot files in the repo being inaccessible.
+
 ## User-agent Keywords commented out:
 ```
 - Alligator,
