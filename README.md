@@ -28,8 +28,11 @@
 - Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/cc16f568bf61b14d1ce0080fe4635595cd1d9a4c).
 - Alternatively, point your updater script to the configuration hosted on my Codeberg mirror: [Edits](../../../commit/bf87f7c276cdf4801b54fc2afa606e971ccf4ac4).
 
-## Important note for self hosted Git repos such as if you use Forgejo like I now do:
-- Please ensure you do not include the `deny.conf` files in any server blocks or location blocks for git repositories such as Forgejo to ensure the repos function as intended. Using it with a git repo that has dotfiles for example will result in the dot files in the repo being inaccessible.
+## Important `deny.conf` notes:
+- **Self hosted Git Repos**:
+  - Please ensure you do not include the `deny.conf` in any server blocks or location blocks for git repositories such as Forgejo to ensure the repos function as intended. Using it with a git repo that has dotfiles for example will result in the dot files in the repo being inaccessible.
+- **Proof of Work AI bot blockers:
+  - While you can use this blocker as a first line of defence before proxying through proof of work AI bot blockers such as [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away), and is recommended, again like above, please ensure you do not include the `deny.conf` in any server blocks or locations blocks being proxied through these proof of work blockers as they'll be completely broken otherwise. Use the `deny.conf` on the backend blocks after being run through the proof of work blocker. Downside to this though is it returns 404 as a result instead of 444. I'll update if I manage to find out among the denies breaks things, which may likely tbh be again to do with the dotfile stuff.
 
 ## User-agent Keywords commented out:
 ```
