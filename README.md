@@ -16,7 +16,7 @@
 
 ## Changes:
 - In `deny.conf`, add an exclusion for `.well-known` requests: [Edits](../../../commit/d3459217f2394ac9ed50d1fcac0cd7b323637c7f).
-- In `deny.conf`, in order for [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away) to work, add exclusions for `.within-website` and `.git.` requests (not to be confused with `.git`): [Edits](../../../commit/c7cb0d953b4bd617bb1015806c22ff7e2cf9c72c).
+- In `deny.conf`, in order for [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away) to work, add exclusions for `.within-website` and `.git.` requests (not to be confused with `.git`): [Edits 1](../../../commit/c7cb0d953b4bd617bb1015806c22ff7e2cf9c72c), [Edits 2](../../../commit/d2f413aed36620593ee202e0472833b6dd41d678).
 - In `deny.conf`, comment out the image hotlinking section so hotlinking isn't prevented: [Edits](../../../commit/13b8798f04dfffd58d9d22224b7ec3e660398da5).
 - In `deny.conf`, if you want to block fedi blocklist scrapers, add a block for `/api/v1/blocks` & `/api/v1/peers` requests: [Edits](../../../commit/660f5d55a19c672d3a837128dda181bee98e40ef).
 - In `globalblacklist.conf`, comment out problem user-agent keyword blocks so they don't cause false positives: See below for list.
@@ -28,7 +28,7 @@
 - Follow instructions for installing files from the [upstream repo](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/blob/master/MANUAL-CONFIGURATION.md).
 - Edit your `deny.conf` file with the changes provided in these two commits as also stated above: [Commit 1](../../../commit/d3459217f2394ac9ed50d1fcac0cd7b323637c7f), [Commit 2](../../../commit/13b8798f04dfffd58d9d22224b7ec3e660398da5).
 - If you want to deny fedi blocklist scrapers access to the peers and blocks api routes, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits](../../../commit/660f5d55a19c672d3a837128dda181bee98e40ef).
-- If you use Anubis or go-away, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits](../../../commit/c7cb0d953b4bd617bb1015806c22ff7e2cf9c72c).
+- If you use Anubis or go-away, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits 1](../../../commit/c7cb0d953b4bd617bb1015806c22ff7e2cf9c72c), [Edits 2](../../../commit/d2f413aed36620593ee202e0472833b6dd41d678).
 - Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/cc16f568bf61b14d1ce0080fe4635595cd1d9a4c).
 - Alternatively, point your updater script to the configuration hosted on my Codeberg mirror: [Edits](../../../commit/bf87f7c276cdf4801b54fc2afa606e971ccf4ac4).
 
