@@ -5,8 +5,11 @@
 * Forked from: https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker.
 * Also mirrored on [Github](https://github.com/jwbjnwolf/nginx-bad-bot-blocker), but please github users of this fork, migrate to using either Codeberg or Forgejo.
 
-#### The default configuration for this blocker interferes with fedi software, such as Mastodon/GoToSocial from federating correctly.
-#### It also blocks a lot of Tor exit nodes as a result of them getting caught up in bad traffic.
+## Why this fork?
+The default configuration for this blocker interferes with fedi software, such as Mastodon/GoToSocial/IceShrimp/Akkoma from federating correctly.<br>
+It also blocks a lot of Tor exit nodes as a result of them getting caught up in bad traffic.<br>
+This fork exists to solve this, so it's suitable for fedi admins and people who wish to have their services available to tor users.<br>
+Also in addition to the above purposes, I've made the  `deny.conf` compatible for running [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away) behind this blocker.
 
 ## Problem:
 - The `deny.conf` behavior of blocking dot file/folder requests doesn't exclude `.well-known`, that fedi software needs to crawl to federate properly.
@@ -22,7 +25,7 @@
 - In `globalblacklist.conf`, comment out problem user-agent keyword blocks so they don't cause false positives: See below for list.
 - In `globalblacklist.conf`, changed the very not good bot "AdsBot-Google" to be blocked. ADs can get in the damn bin.
 - In `globalblacklist.conf`, added some AI crawler bots to be blocked that aren't currently present.
-- Added a bash script to routinely comment out Tor exit node IPs in `globalblacklist.conf` when I sync from upstream.
+- Added a bash script to routinely comment out Tor exit node IPs in `globalblacklist.conf` when I sync from upstream. The exit node list is retrieved from check.torproject.org.
 
 ## How to use this fork instead of upstream:
 - Follow instructions for installing files from the [upstream repo](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/blob/master/MANUAL-CONFIGURATION.md).
