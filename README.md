@@ -32,7 +32,7 @@ Also in addition to the above purposes, I've made the  `deny.conf` compatible fo
 - Edit your `deny.conf` file with the changes provided in these two commits as also stated above: [Commit 1](../../../commit/d3459217f2394ac9ed50d1fcac0cd7b323637c7f), [Commit 2](../../../commit/13b8798f04dfffd58d9d22224b7ec3e660398da5).
 - If you want to deny fedi blocklist scrapers access to the peers and blocks api routes, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits](../../../commit/660f5d55a19c672d3a837128dda181bee98e40ef).
 - If you use Anubis or go-away, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits 1](../../../commit/c7cb0d953b4bd617bb1015806c22ff7e2cf9c72c), [Edits 2](../../../commit/d2f413aed36620593ee202e0472833b6dd41d678).
-- Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/cc16f568bf61b14d1ce0080fe4635595cd1d9a4c).
+- Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/d516896054398363a6ec8eb85cc2752afecec42a).
 - Alternatively, point your updater script to the configuration hosted on my Codeberg mirror: [Edits](../../../commit/bf87f7c276cdf4801b54fc2afa606e971ccf4ac4).
 
 ## Important `deny.conf` notes:
