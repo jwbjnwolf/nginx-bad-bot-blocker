@@ -1,0 +1,50 @@
+#!/bin/bash
+
+#### Ensure are on dev branch
+git checkout dev
+####
+
+#### Get latest abuseIPDB 10k IP list
+echo "Getting latest abuseIPDB 10k IP list"
+  source scripts/_abuseIPDB.key
+  curl -Gs https://api.abuseipdb.com/api/v2/blacklist \
+    -d confidenceMinimum=90 \
+    -H "Key: $abuseIPDB_KEY" \
+    -H "Accept: text/plain" \
+    -o _generator_lists/bad-ip-addresses.list
+echo "done"
+####
+
+#### Get latest lists from mitchellkrogza's repos
+echo "Getting latest lists from mitchellkrogza's repos"
+  upstreamlists="https://raw.githubusercontent.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/refs/heads/master/_generator_lists"
+  upstreamlists_apache="https://raw.githubusercontent.com/mitchellkrogza/apache-ultimate-bad-bot-blocker/refs/heads/master/_generator_lists"
+  files=(
+    "allowed-user-agents.list"
+    "bad-referrers.list"
+    "bad-user-agents.list"
+    "bing-ip-ranges.list"
+    "bunnycdn-net.list"
+    "cloudflare-ip-ranges.list"
+    "fake-googlebots.list"
+    "good-user-agents.list"
+    "google-ip-ranges.list"
+    "limited-user-agents.list"
+    "nibbler-seo.list"
+    "seo-analysis-tools.list"
+    "wordpress-theme-detectors.list"
+  )
+  files_apache=(
+    "bad-user-agents-fail2ban-additional.list"
+    "wordpress-theme-detectors-apache.list"
+  )
+  for file in "${files[@]}"; do
+    curl -s $upstreamlists/$file \
+      -o _generator_lists/$file
+  done
+  for file in "${files_apache[@]}"; do
+    curl -s $upstreamlists_apache/$file \
+      -o _generator_lists/$file
+  done
+echo "done"
+####
