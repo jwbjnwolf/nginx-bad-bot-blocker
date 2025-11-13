@@ -48,3 +48,39 @@ echo "Getting latest lists from mitchellkrogza's repos"
   done
 echo "done"
 ####
+
+#### Remove user agents for fedi compatability from bad-user-agents.list
+allowed_agents="_generator_lists/allowed-user-agents-fedi.list"
+bad_agents="_generator_lists/bad-user-agents.list"
+temp_file="_generator_lists/temp_bad_user_agents.list"
+
+echo "Removing user agents for fedi compatability from bad-user-agents.list"
+  grep -v -F -f "$allowed_agents" "$bad_agents" > "$temp_file"
+  mv "$temp_file" "$bad_agents"
+echo "done"
+####
+
+#### Add additional user agents to bad-user-agents.list
+extra_agents="_generator_lists/added-bad-user-agents.list"
+echo "Adding additional user agents to bad-user-agents.list"
+  cat "$bad_agents" "$extra_agents" | sort -u > "$temp_file"
+  mv "$temp_file" "$bad_agents"
+echo "done"
+####
+
+#### Change good user agents to bad
+notgood_agents="_generator_lists/good-to-bad-user-agents.list"
+good_agents="_generator_lists/good-user-agents.list"
+bad_agents="_generator_lists/bad-user-agents.list"
+temp_file="_generator_lists/temp_bad_user_agents.list"
+
+echo "Removing good user agents that should be bad from good-user-agents.list"
+  grep -v -F -f "$notgood_agents" "$good_agents" > "$temp_file"
+  mv "$temp_file" "$good_agents"
+echo "done"
+
+echo "Adding the removed good user agents to bad-user-agents.list"
+  cat "$bad_agents" "$notgood_agents" | sort -u > "$temp_file"
+  mv "$temp_file" "$bad_agents"
+echo "done"
+####
