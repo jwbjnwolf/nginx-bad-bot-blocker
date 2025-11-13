@@ -84,3 +84,19 @@ echo "Adding the removed good user agents to bad-user-agents.list"
   mv "$temp_file" "$bad_agents"
 echo "done"
 ####
+
+#### Get latest tor exits list from torproject.org & remove matches from bad-ip-addresses.list
+tor_ips="_generator_lists/tor-exit-nodes.list"
+bad_ips="_generator_lists/bad-ip-addresses.list"
+temp_file="_generator_lists/temp_bad_ip-addresses.list"
+
+echo "Getting latest tor exits list from torproject.org"
+  curl -s https://check.torproject.org/torbulkexitlist \
+    -o $tor_ips
+echo "done"
+
+echo "Removing tor exit node matches from bad-ip-addresses.list"
+  grep -v -F -f "$tor_ips" "$bad_ips" > "$temp_file"
+  mv "$temp_file" "$bad_ips"
+echo "done"
+####
