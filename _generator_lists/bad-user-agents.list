@@ -11,28 +11,25 @@ Abonti
 Aboundex
 Aboundexbot
 Acunetix
+AdsBot-Google
 AdsTxtCrawlerTP
 AfD-Verbotsverfahren
 AhrefsBot
 Ai2Bot
 AiHitBot
+Ai[0-9]bot
 Aipbot
 Alexibot
 Aliyun
 AliyunSecBot
 AllSubmitter
-Alligator
 AlphaBot
-Anarchie
-Anarchy
-Anarchy99
 Ankit
 Anthill
 Apexoo
 Aspiegel
 Asterias
 Atomseobot
-Attach
 AwarioBot
 AwarioRssBot
 AwarioSmartBot
@@ -41,34 +38,22 @@ BDCbot
 BDFetch
 BLEXBot
 BackDoorBot
-BackStreet
-BackWeb
 Backlink-Ceck
 BacklinkCrawler
 BacklinksExtendedBot
-Badass
-Bandit
 Barkrowler
 BatchFTP
 Battleztar\ Bazinga
 BetaBot
-Bigfoot
 Bitacle
-BlackWidow
 Black\ Hole
 Blackboard
-Blow
-BlowFish
 Boardreader
-Bolt
 BotALot
 Brandprotect
 Brandwatch
-Buck
-Buddy
 BuiltBotTough
 BuiltWith
-Bullseye
 BunnySlippers
 BuzzSumo
 Bytespider
@@ -93,18 +78,12 @@ Cliqzbot
 Cloud\ mapping
 Cocolyzebot
 Cogentbot
-Collector
-Copier
 CopyRightCheck
 Copyscape
-Cosmos
 Craftbot
 Crawling\ at\ Home\ Project
 CrazyWebCrawler
-Crescent
 CrunchBot
-Curious
-Custo
 CyotekWebCopy
 DBLBot
 DIIbot
@@ -112,15 +91,10 @@ DSearch
 DTS\ Agent
 DataCha0s
 DatabaseDriverMysqli
-Demon
 Deusu
-Devil
 Digincore
 DigitalPebble
 Dirbuster
-Disco
-Discobot
-Discoverybot
 Dispatch
 DittoSpyder
 DnBCrawler-Analytics
@@ -133,8 +107,6 @@ DomainStatsBot
 Domains\ Project
 Dotbot
 Download\ Wonder
-Dragonfly
-Drip
 ECCP/1.0
 EMail\ Siphon
 EMail\ Wolf
@@ -143,7 +115,6 @@ Ebingbong
 Ecxi
 EirGrabber
 EroCrawler
-Evil
 Exabot
 Express\ WebPictures
 ExtLinksBot
@@ -162,8 +133,6 @@ FlashGet
 Flunky
 Foobot
 Freeuploader
-FrontPage
-Fuzz
 FyberSpider
 Fyrebot
 G-i-g-a-b-o-t
@@ -194,7 +163,6 @@ HTTP::Lite
 HTTrack
 Haansoft
 HaosouSpider
-Harvest
 Havij
 Heritrix
 Hloader
@@ -208,7 +176,6 @@ Iblog
 Id-search
 IlseBot
 Image\ Fetch
-Image\ Sucker
 ImagesiftBot
 IndeedBot
 Indy\ Library
@@ -220,8 +187,6 @@ Intelliseek
 InterGET
 InternetMeasurement
 InternetSeer
-Internet\ Ninja
-Iria
 Iskanie
 IstellaBot
 JOC\ Web\ Spider
@@ -238,13 +203,11 @@ Jyxobot
 Kenjin\ Spider
 Keybot\ Translation-Search-Machine
 Keyword\ Density
-Kinza
 Kozmosbot
 LNSpiderguy
 LWP::Simple
 Lanshanbot
 Larbin
-Leap
 LeechFTP
 LeechGet
 LexiBot
@@ -273,11 +236,9 @@ MIDown\ tool
 MIIxpc
 MJ12bot
 MQQBrowser
-MSFrontPage
 MSIECrawler
 MTRobot
 Mag-Net
-Magnet
 Mail.RU_Bot
 Majestic-SEO
 Majestic12
@@ -300,7 +261,6 @@ Microsoft\ URL\ Control
 Minefield
 Mister\ PiX
 Moblie\ Safari
-Mojeek
 Mojolicious
 MolokaiBot
 Morfeus\ Fucking\ Scanner
@@ -314,7 +274,6 @@ Name\ Intelligence
 Nameprotect
 Navroad
 NearSite
-Needle
 Nessus
 NetAnts
 NetLyzer
@@ -326,18 +285,16 @@ Netcraft
 Nettrack
 Netvibes
 NextGenSearchBot
-Nibbler
 Niki-bot
 Nikto
 NimbleCrawler
 Nimbostratus
-Ninja
 Nmap
 Nuclei
 Nutch
-Octopus
 Offline\ Explorer
 Offline\ Navigator
+Omgilibot
 OnCrawl
 OpenLinkProfiler
 OpenVAS
@@ -376,7 +333,6 @@ Probethenet
 Proximic
 Psbot
 Pu_iN
-Pump
 PxBroker
 PyCurl
 QueryN\ Metasearch
@@ -393,12 +349,10 @@ RankurBot
 Re-re
 ReGet
 RealDownload
-Reaper
 RebelMouse
 Recorder
 RedesScrapy
 RepoMonkey
-Ripper
 RocketCrawler
 Rogerbot
 SBIder
@@ -415,7 +369,6 @@ ScanAlert
 Scanbot
 ScoutJet
 Scrapy
-Screaming
 ScreenerBot
 ScrepyBot
 Searchestate
@@ -443,16 +396,12 @@ SiteCheckerBotCrawler
 SiteExplorer
 SiteLockSpider
 SiteSnagger
-SiteSucker
-Site\ Sucker
 Sitebeam
 Siteimprove
 Sitevigil
 SlySearch
 SmartDownload
-Snake
 Snapbot
-Snoopy
 SocialRankIOBot
 Sociscraper
 Sogou\ web\ spider
@@ -461,7 +410,6 @@ Sottopop
 SpaceBison
 Spammen
 SpankBot
-Spanner
 Spbot
 Spider_Bot
 Spider_Bot/3.0
@@ -471,9 +419,6 @@ SputnikBot
 Sqlmap
 Sqlworm
 Sqworm
-Steeler
-Stripper
-Sucker
 Sucuri
 SuperBot
 SuperHTTP
@@ -484,17 +429,13 @@ Swiftbot
 Szukacz
 T0PHackTeam
 T8Abot
-Teleport
-TeleportPro
 Telesoft
 Telesphoreo
 Telesphorep
-TheNomad
 The\ Intraformant
 Thumbor
 TightTwatBot
 TinyTestBot
-Titan
 Toata
 Toweyabot
 Tracemyfile
@@ -505,7 +446,6 @@ Turingos
 Turnitin
 TurnitinBot
 TwengaBot
-Twice
 Typhoeus
 URLy.Warning
 URLy\ Warning
@@ -528,7 +468,6 @@ WBSearchBot
 WEBDAV
 WISENutbot
 WPScan
-WWW-Collector-E
 WWW-Mechanize
 WWW::Mechanize
 WWWOFFLE
@@ -537,21 +476,14 @@ Wallpapers/3.0
 WallpapersHD
 WeSEE
 WebAuto
-WebBandit
 WebCollage
-WebCopier
 WebEnhancer
 WebFetch
 WebFuck
 WebGo\ IS
-WebImageCollector
 WebLeacher
 WebPix
-WebReaper
 WebSauger
-WebStripper
-WebSucker
-WebWhacker
 WebZIP
 Web\ Auto
 Web\ Collage
@@ -560,19 +492,15 @@ Web\ Fetch
 Web\ Fuck
 Web\ Pix
 Web\ Sauger
-Web\ Sucker
 Webalta
 WebmasterWorldForumBot
 Webshag
 WebsiteExtractor
 WebsiteQuester
 Website\ Quester
-Webster
-Whack
-Whacker
+WellKnownBot
 Whatweb
 Who.is\ Bot
-Widow
 WinHTTrack
 WiseGuys\ Robot
 Wonderbot
@@ -581,13 +509,10 @@ Wotbox
 Wprecon
 Xaldon\ WebSpider
 Xaldon_WebSpider
-Xenu
 YaK
 YoudaoBot
-Zade
 Zauba
 Zermelo
-Zeus
 Zitebot
 ZmEu
 ZoomBot
