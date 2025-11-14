@@ -1,0 +1,636 @@
+### -----------------------------------------------------------
+### THE NGINX ULTIMATE BAD BOT, BAD IP AND BAD REFERRER BLOCKER
+### -----------------------------------------------------------
+
+### VERSION INFORMATION #
+###################################################
+### Version: !!!!build-version-here!!!!
+### Updated: !!!!update-timedate-here!!!!
+### Bad Referrer Count: !!!!bad-referrer-count-here!!!!
+### Bad Bot Count: !!!!bad-bot-count-here!!!!
+###################################################
+### VERSION INFORMATION ##
+
+### --------------------------------------------
+### HELP SUPPORT THIS PROJECT - Send Me a Coffee
+### https://ko-fi.com/mitchellkrog
+### --------------------------------------------
+
+##############################################################################                                                                
+#       _  __     _                                                          #
+#      / |/ /__ _(_)__ __ __                                                 #
+#     /    / _ `/ / _ \\ \ /                                                 #
+#    /_/|_/\_, /_/_//_/_\_\                                                  #
+#       __/___/      __   ___       __     ___  __         __                #
+#      / _ )___ ____/ /  / _ )___  / /_   / _ )/ /__  ____/ /_____ ____      #
+#     / _  / _ `/ _  /  / _  / _ \/ __/  / _  / / _ \/ __/  '_/ -_) __/      #
+#    /____/\_,_/\_,_/  /____/\___/\__/  /____/_/\___/\__/_/\_\\__/_/         #
+#                                                                            #
+##############################################################################                                                                
+
+### This file implements a checklist / blacklist for good user agents, bad user agents and
+### bad referrers on Nginx Web Server. It also has whitelisting for your own IP's and known good IP Ranges
+### and also has rate limiting functionality for bad bots who you only want to rate limit
+### and not actually block out entirely. It is very powerful and also very flexible.
+
+### --------------------------------------------------------------------------
+### Created By: https://github.com/mitchellkrogza/
+### Repo Url: https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker
+### Copyright Mitchell Krog - <mitchellkrog@gmail.com>
+### Contributors: Stuart Cardall - https://github.com/itoffshore
+### --------------------------------------------------------------------------
+
+### --------------------------------------------------------------------------
+### Tested on: nginx/1.10.3 up to latest Mainstream Version (Ubuntu 16.04)
+### --------------------------------------------------------------------------
+
+### This list was developed and is in use on a live Nginx server running some very busy web sites.
+### It was built from the ground up using real data from daily logs and is updated almost daily.
+### It has been extensively tested for false positives and all additions to the lists of bad user agents,
+### spam referrers, rogue IP address, scanners, scrapers and domain hijacking sites are extensively checked
+### before they are added. It is monitored extensively for any false positives.
+
+### ---------
+### Features:
+### ---------
+###	Clear formatting for Ease of Maintenance.
+###	Alphabetically ordered lists for Ease of Maintenance.
+###	Extensive Commenting for Ease of Reference.
+###	Extensive bad_bot list
+###	Extensive bad_referrer list (please excuse the nasty words and domains)
+###	Simple regex patterns versus complicated messy regex patterns.
+###	Checks regardless of http / https urls or the lack of any protocol sent.
+###	IP range blocking / whitelisting.
+###	Rate Limiting Functions.
+
+### ------------
+### INSTALLATION
+### ------------
+
+### PLEASE use the install, setup and update scripts provided for you to ease your installation.
+### This Auto Installation procedure is documented in the README.md and AUTO-CONFIGURATION.md files.
+### Installation, Setup and Update Scripts Contributed by Stuart Cardall - https://github.com/itoffshore
+### There are also manual configuration instructions provided for those not wishing to do an auto install.
+
+### -----------------------------------------------
+###	!!!!! PLEASE READ INLINE NOTES ON TESTING !!!!!
+### -----------------------------------------------
+
+###	SETTINGS: 
+### ---------------------------------------------
+###	0 = allowed - no limits
+###	1 = allowed - (rate limited but limiting rate zone not implemented) 
+###	2 = rate limited
+###	3 = block completely
+###	4 = super rate limited
+###
+###	Value 1 (allowed but rate limited) was originally intended for another rate limiting zone which is less restrictive than the current rate limiting zones.
+###	The rate limiting zone for this has not been introduced as yet.
+### ---------------------------------------------
+
+### ------------------------------------------------------------
+### CONTRIBUTING / PULL REQUESTS / ADDING YOUR OWN BAD REFERRERS
+### ------------------------------------------------------------
+
+### For contributing, corrections or adding bots or referrers to this repo,
+### Send a Pull Request (PR) on any of the .list files in the _generator_lists folder
+### All Pull Requests will be checked for accuracy before being merged.
+
+# -----------------------
+# !!!!! PLEASE TEST !!!!!
+# -----------------------
+
+# ALWAYS test any User-Agent Strings you add here to make sure you have it right
+# Use a Chrome Extension called "User-Agent Switcher for Chrome" where you can create your
+# own custom lists of User-Agents and test them easily against your rules below.
+
+# You can also use curl from the command line to test user-agents as per the examples below:
+
+# curl -I http://www.yourdomain.com -A "GoogleBot"  ---- GIVES YOU: HTTP/1.1 200 OK (Meaning web page was served to Client)
+# curl -I http://www.yourdomain.com -A "80legs"     ---- GIVES YOU: curl: (52) Empty reply from server (Meaning Nginx gave a 444 Dropped Connection)
+
+
+# =======================
+# START BLOCKER FUNCTIONS
+# =======================
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# DO NOT EDIT ANYTHING BELOW THIS LINE !!!
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+# =============================
+# BEGIN SECTION 1 - USER-AGENTS
+# =============================
+
+# ALLOW / BLOCK User Agents / Bots
+
+# -------------------------------------------------------------------
+# Map all GOOD and BAD UA (User Agents) to a variable called $bad_bot
+# -------------------------------------------------------------------
+
+map $http_user_agent $bad_bot {
+	default		0;
+
+# -----------------------------------------------------------------------------------
+# START CUSTOM BLACKLISTED USER AGENTS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# -----------------------------------------------------------------------------------
+
+# Include your Own Custom List of Bad User Agents
+# Use the include file below to further customize your own list of additional user-agents you wish to permanently block
+# This include file allows whitelisting and blacklisting of anything specified below it.
+# This include file alows you to over-ride any Bad / Good UA (Bot) declared in this blocker to your liking.
+
+	include /etc/nginx/bots.d/blacklist-user-agents.conf;
+
+# ---------------------------------------------------------------------------------
+# END CUSTOM BLACKLISTED USER AGENTS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# ---------------------------------------------------------------------------------
+
+# --------------------------------------------------
+# BAD UA (User-Agent) Strings That We Block Outright
+# --------------------------------------------------
+
+# START BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!BAD-BOTS-LIST-HERE!!!!
+# END BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
+# --------------------------------------------
+# GOOD UA User-Agent Strings We Know and Trust
+# --------------------------------------------
+
+# -----------------------------------------------------------------------
+# You can over-ride these in /etc/nginx/bots.d/blacklist-user-agents.conf
+# by adding the same UA line there and chaning its value of 1
+# If you think GoogleBot is bad you would simply add them to 
+# blacklist-user-agents.conf with a value of 1
+# -----------------------------------------------------------------------
+
+# START GOOD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!GOOD-BOTS-LIST-HERE!!!!
+# END GOOD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
+# --------------------------------------------------------
+# GOOD UA User-Agent Rate Limiting 1 - Disabled by Default
+# --------------------------------------------------------
+
+	# TO ACTIVATE THIS RATE LIMITING Uncomment these two lines in blockbots.conf
+	#limit_conn bot1_connlimit 100;
+	#limit_req  zone=bot1_reqlimitip burst=50;
+
+# START ALLOWED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!ALLOWED-BOTS-LIST-HERE!!!!
+# END ALLOWED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
+# -------------------------------------------------------
+# GOOD UA User-Agent Rate Limiting 2 - Enabled by Default
+# -------------------------------------------------------
+
+# -----------------------------------------------------------------------
+# You can over-ride these in /etc/nginx/bots.d/blacklist-user-agents.conf
+# by adding the same UA line there and chaning its value of 1
+# -----------------------------------------------------------------------
+
+# START LIMITED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!LIMITED-BOTS-LIST-HERE!!!!
+# END LIMITED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
+}	
+
+# ===========================
+# END SECTION 1 - USER-AGENTS
+# ===========================
+
+# =======================================
+# BEGIN SECTION 2 - REFERRERS AND DOMAINS
+# =======================================
+
+# ----------------
+# PLEASE TEST !!!!
+# ----------------
+# ------------------------------------------------------------------------------------------------------------------------------
+# ALWAYS test referrers that you add. This is done manually as follows
+# ------------------------------------------------------------------------------------------------------------------------------
+# curl -I http://www.yourdomain.com -e http://anything.adcash.com              --- GIVES YOU: curl: (52) Empty reply from server
+# curl -I http://www.yourdomain.com -e http://www.goodwebsite.com/not-adcash   --- GIVES YOU: curl: (52) Empty reply from server
+# curl -I http://www.yourdomain.com -e http://www.betterwebsite.com/not/adcash --- GIVES YOU: curl: (52) Empty reply from server
+# ------------------------------------------------------------------------------------------------------------------------------
+# curl -I http://www.yourdomain.com -e http://www.google.com                   --- GIVES YOU: full html output of the web page
+# curl -I http://www.yourdomain.com -e http://www.microsoft.com                --- GIVES YOU: full html output of the web page
+# ------------------------------------------------------------------------------------------------------------------------------
+# Because of case-insensitive matching any combination of capitilization in the names will all produce a positive hit
+# make sure you always test thoroughly and monitor logs. This section below also does NOT check for a preceding www. 
+# and it also does not care if the referrer request was sent with http https or even ftp.
+# ------------------------------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------
+# Map all BAD referrer words below to a variable called $bad_words
+# ----------------------------------------------------------------
+
+# --------------------------------
+# START Bad Referrer Word Scanning
+# --------------------------------
+
+map $http_referer $bad_words {
+    default 0;
+
+# -------------------------------------------------------------------------------------------
+# These are Words and Terms often found tagged onto domains or within url query strings.
+# Create and Customize Your Own Bad Referrer Words Here using the new Include File Method
+  # New Method Uses the include file below so that when pulling future updates your
+  # customized list of bad referrer words are automatically now included for you
+  # Read Comments inside bad-referrer-words.conf for customization tips.
+  # Updating the main globalblacklist.conf file will not touch your custom include files
+  # BE VERY CAREFUL using this bad-referrer-words.conf file - please read the comments and
+  # examples inside the include file for detailed explanations into how seriously this can
+  # affect your own site from serving assets or other innocent sites from accessing your site
+  # For safety sake the whitelist-domains.conf file is also loaded here before the 
+  # bad-referrer-words.conf file is loaded.
+# -------------------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------
+# START WHITELISTED DOMAINS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# ------------------------------------------------------------------------
+
+  	include /etc/nginx/bots.d/whitelist-domains.conf;
+
+# ----------------------------------------------------------------------  	
+# END WHITELISTED DOMAINS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# ----------------------------------------------------------------------  	
+
+
+# ------------------------------------------------------------------------------
+# START CUSTOM BAD REFERRER WORDS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# ------------------------------------------------------------------------------
+
+	include /etc/nginx/bots.d/bad-referrer-words.conf;
+
+# ----------------------------------------------------------------------------
+# END CUSTOM BAD REFERRER WORDS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# ----------------------------------------------------------------------------
+
+}
+# --------------------------------
+# END Bad Referrer Word Scanning
+# --------------------------------
+
+
+# ----------------------------------------
+# START Good and Bad Referrer Domain Names
+# ----------------------------------------
+
+# -------------------------------------------------------------------------------------
+# Good and Bad referrer urls Doesn't matter if the protocol is http, https or even ftp
+# -------------------------------------------------------------------------------------
+
+# ----------------------
+# This section includes:
+# ----------------------
+# --------------------------------------------------------------------------------
+# Blocking of SEO company Semalt.com (now merged into this one section)
+# MIRAI Botnet Domains Used for Mass Attacks
+# Other known bad SEO companies and Ad Hijacking Sites  
+# Sites linked to malware, adware, clickjacking and ransomware
+# Domain names and referrers used in referrer spam and seo hijacking
+# Whitelisting of your own GOOD domains / referrers
+# Whitelisting of any other GOOD domains / referrers you want explicitly NOT block
+# --------------------------------------------------------------------------------
+
+# ----------------
+# PLEASE TEST !!!!
+# ----------------
+# ------------------------------------------------------------------------------------------------------------------------------------
+# ALWAYS test referrers that you add. This is done manually as follows
+# ------------------------------------------------------------------------------------------------------------------------------------
+# curl -I http://www.yourdomain.com -e http://8gold.com --- GIVES YOU: curl: (52) Empty reply from server
+# ------------------------------------------------------------------------------------------------------------------------------------
+# Because of case-insensitive matching any combination of capitilization will all produce a positive hit - make sure you always test.
+# ------------------------------------------------------------------------------------------------------------------------------------
+# For Example any of the following variations below of 8gold.com will be detected and blocked
+# ------------------------------------------------------------------------------------------------------------------------------------
+# curl -I http://www.yourdomain.com -e http://NOT-8gold.com        --- GIVES YOU: curl: (52) Empty reply from server
+# curl -I http://www.yourdomain.com -e http://this.is.not8gOlD.net --- GIVES YOU: curl: (52) Empty reply from server
+# curl -I http://www.yourdomain.com -e ftp://8gold.com             --- GIVES YOU: curl: (52) Empty reply from server
+# curl -I http://www.yourdomain.com -e ftp://www.weare8gold.NET    --- GIVES YOU: curl: (52) Empty reply from server
+# curl -I http://www.yourdomain.com -e https://subdomain.8gold.com --- GIVES YOU: curl: (52) Empty reply from server
+# curl -I http://www.yourdomain.com -e https://NOT8GolD.org        --- GIVES YOU: curl: (52) Empty reply from server
+# ------------------------------------------------------------------------------------------------------------------------------------
+# So if you see a bad referrer from wearegoogle.com and you want to block them just add
+# them as "~*wearegoogle.com" don't ever go and do something like "~*google(-|.)" you will
+# kill all your SEO in a week. 
+# ------------------------------------------------------------------------------------------------------------------------------------
+# To add your own custom bad referrers use the custom include file
+# /etc/nginx/bots.d/custom-bad-referrers.conf
+# Or send a Pull Request to add it to the global blacklist for other users.
+# In the bad referrers section I also include sites that hotlink images without permission.
+# ------------------------------------------------------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------
+# Map all good & bad referrer DOMAINS to a variable called bad_referer
+# --------------------------------------------------------------------
+
+map $http_referer $bad_referer {
+	hostnames;
+	default 0;
+
+# --------------------------------------------
+# GOOD REFERRER DOMAINS - Spared from Checking 
+# --------------------------------------------
+
+# ---------------------------------------------------------------------------------------
+# Add all your own web site domain names and server names in this section
+# WHITELIST Your Own Domain Names Here using the new Include File Method
+  # New Method Uses the include file below so that when pulling future updates your
+  # whitelisted domain names are automatically now included for you.
+  # Read Comments inside whitelist-domains.conf for customization tips.
+  # Updating the main globalblacklist.conf file will not touch your custom include files
+# ---------------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------
+# START WHITELISTED DOMAINS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# ------------------------------------------------------------------------
+
+  	include /etc/nginx/bots.d/whitelist-domains.conf;
+
+# ----------------------------------------------------------------------
+# END WHITELISTED DOMAINS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# ----------------------------------------------------------------------
+
+# -----------------------------------
+# CUSTOM BAD REFERRERS - Add your Own 
+# -----------------------------------
+
+# Add any extra bad referrers in the following include file to have them
+# permanently included and blocked - avoid duplicates in your custom file
+# custom-bad-referrers.conf is BOTH a BLACKLIST AND WHITELIST
+# custom-bad-referrers.conf ALLOWS complete over-riding of anything 
+# If you think google.com is bad you would simply add them to 
+# custom-bad-referrers.conf with a value of 1
+
+# -------------------------------------------------------------------------
+# START CUSTOM BAD REFERRERS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# -------------------------------------------------------------------------
+
+  	include /etc/nginx/bots.d/custom-bad-referrers.conf;
+
+# -----------------------------------------------------------------------
+# END CUSTOM BAD REFERRERS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# -----------------------------------------------------------------------
+
+# START BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!BAD-REFERRERS-LIST-HERE!!!!
+# END BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+}
+
+# =====================================
+# END SECTION 2 - REFERRERS AND DOMAINS
+# =====================================
+
+# ========================================================================
+# BEGIN SECTION 3 - WHITELISTING AND BLACKLISTING IP ADDRESSESE AND RANGES
+# ========================================================================
+
+# --------------------------------------------------------------------------------------
+# Map all GOOD and BAD IP Addresses and Ranges to a variable called geo $validate_client
+# --------------------------------------------------------------------------------------
+
+geo $validate_client {
+	default		0;
+
+# ---------------
+# FAKE GoogleBots
+# ---------------
+
+# START FAKE GOOGLEBOTS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!FAKE-GOOGLEBOTS-LIST-HERE!!!!
+# END FAKE GOOGLEBOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
+
+# -------------------------------------
+# BLOCK known Wordpress Theme Detectors
+# -------------------------------------
+  
+# START WP THEME DETECTORS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!WORDPRESS-BOTS-LIST-HERE!!!!
+# END WP THEME DETECTORS ### DO NOT EDIT THIS LINE AT ALL ###
+
+# ----------------------------------------------
+# BLOCK NIBBLER - SEO testing and reporting tool
+# ----------------------------------------------
+# See - http://nibbler.silktide.com/
+# ----------------------------------------------
+
+# START NIBBLER ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!NIBBLER-LIST-HERE!!!!
+# END NIBBLER ### DO NOT EDIT THIS LINE AT ALL ###
+
+
+# ----------------------------------------------
+# BLOCK KNOWN - SEO testing and reporting tools
+# ----------------------------------------------
+
+
+# START SEO ANALYSIS TOOLS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!SEO-LIST-HERE!!!!
+# END SEO ANALYSIS TOOLS ### DO NOT EDIT THIS LINE AT ALL ###
+
+
+
+# -----------------------------------------
+# BLOCK KNOWN BAD IP ADDRESSES
+# Top known bad IP Adresses from abuseIPDB
+# -----------------------------------------
+
+# START KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!BAD-IP-LIST-HERE!!!!
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
+
+# --------------------------
+# WHITELIST Google IP Ranges
+# --------------------------
+
+# START GOOGLE IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!GOOGLE-IP-LIST-HERE!!!!
+# END GOOGLE IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
+
+# ------------------------
+# WHITELIST Bing IP Ranges
+# ------------------------
+
+# START BING IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!BING-IP-LIST-HERE!!!!
+# END BING IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
+
+# ------------------------------
+# WHITELIST Cloudflare IP Ranges
+# ------------------------------
+
+# START CLOUDFLARE IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!CLOUDFLARE-IP-LIST-HERE!!!!
+# END CLOUDFLARE IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
+
+# ---------------------------------
+# WHITELIST BUNNY.NET CDN IP RANGES
+# ---------------------------------
+
+# START BUNNY.NET CDN ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!BUNNY-IP-LIST-HERE!!!!
+# END BUNNY.NET CDN ### DO NOT EDIT THIS LINE AT ALL ###
+
+
+
+# -------------------------------------------------
+# BLACKLIST IP addresses and IP Ranges Customizable
+# -------------------------------------------------
+
+# --------------------------------------------------------------------------------------
+# BLACKLIST all your IP addresses and Ranges using the new include file below.
+  # New Method Uses the include file below so that when pulling future updates your
+  # Custom Blacklisted IP addresses are automatically now included for you.
+  # Read Comments inside blacklist-ips.conf for customization tips.
+  # Updating the main globalblacklist.conf file will not touch your custom include files
+  # Anything added to blacklist-ips.conf will over-ride anything whitelisted above
+# --------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------
+# START BLACKLISTED IPS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# --------------------------------------------------------------------
+
+	include /etc/nginx/bots.d/blacklist-ips.conf;
+
+# ------------------------------------------------------------------
+# END BLACKLISTED IPS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# ------------------------------------------------------------------
+
+# ----------------------------------------------
+# Whitelist all your OWN IP addresses and Ranges
+# ----------------------------------------------
+
+# --------------------------------------------------------------------------------------
+# WHITELIST all your own IP addresses using the include file below.
+  # New Method Uses the include file below so that when pulling future updates your
+  # whitelisted IP addresses are automatically now included for you.
+  # Read Comments inside whitelist-ips.conf for customization tips.
+  # Updating the main globalblacklist.conf file will not touch your custom include files
+  # whitelist-ips.conf reigns supreme !!!
+  # Whatever you add to whitelist-ips.conf will be whitelisted FULL STOP
+  # Anything blacklisted above this line will be over-ridden by whitelist-ips.conf
+# --------------------------------------------------------------------------------------
+  
+# --------------------------------------------------------------------------
+# START WHITELISTED IP RANGES ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# --------------------------------------------------------------------------
+
+	include /etc/nginx/bots.d/whitelist-ips.conf;
+
+# ------------------------------------------------------------------------
+# END WHITELISTED IP RANGES ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# ------------------------------------------------------------------------
+
+}
+
+# --------------------------------------------------------------------------------------
+# WHITELIST your own IPs from the DDOS Filter
+  # Add your own IP addresses and ranges into the custom include file whitelist-ips.conf 
+  # to spare them from the rate limiting DDOS filter.
+  # This section includes the same / single whitelist-ips.conf file so you only
+  # need to edit that include file and have it include here for you too.
+# --------------------------------------------------------------------------------------
+
+geo $ratelimited {
+	default 1;
+
+# ---------------------------------------------------------------------------
+# START WHITELISTED IP RANGES2 ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# ---------------------------------------------------------------------------
+
+	include /etc/nginx/bots.d/whitelist-ips.conf;
+
+# -------------------------------------------------------------------------
+# END WHITELISTED IP RANGES2 ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
+# -------------------------------------------------------------------------
+
+}
+
+# ======================================================================
+# END SECTION 3 - WHITELISTING AND BLACKLISTING IP ADDRESSESE AND RANGES
+# ======================================================================
+
+
+# ============================================
+# BEGIN SECTION 4 - ACTIVATE BLOCKER FUNCTIONS
+# ============================================
+
+# --------------------------------------------
+# 4.1. MAP BAD BOTS TO OUR RATE LIMITER FUNCTION
+# --------------------------------------------
+
+        map $bad_bot $bot_iplimit {
+        0    "";
+        1    "";
+        2    $binary_remote_addr;
+        4    "";
+        }
+
+# --------------------------------------------------
+# 4.2. MAP BAD BOTS TO OUR SUPER RATE LIMITER FUNCTION
+# --------------------------------------------------
+
+        map $bad_bot $bot_iplimit2 {
+        0    "";
+        1    "";
+        2    "";
+        4    $binary_remote_addr;
+        }
+# --------------------------
+# 4.3. SET RATE LIMITING ZONES
+# --------------------------
+
+# BAD BOT RATE LIMITING ZONE
+# Rate limiting will only take effect if on any User-Agents with a value of 2
+
+	limit_conn_zone $bot_iplimit zone=bot2_connlimit:16m;
+	limit_req_zone  $bot_iplimit zone=bot2_reqlimitip:16m  rate=2r/s;
+
+# BAD BOT SUPER RATE LIMITING ZONE
+# Super Rate limiting will only take effect if on any User-Agents with a value of 4
+
+	limit_conn_zone $bot_iplimit2 zone=bot4_connlimit:16m;
+	limit_req_zone  $bot_iplimit2 zone=bot4_reqlimitip:16m  rate=1r/m;
+
+
+# ==========================================
+# END SECTION 4 - ACTIVATE BLOCKER FUNCTIONS
+# ==========================================
+
+# =====================
+# END BLOCKER FUNCTIONS
+# =====================
+
+### --------------------------------------------
+### HELP SUPPORT THIS PROJECT - Send Me a Coffee
+### https://ko-fi.com/mitchellkrog
+### --------------------------------------------
+
+### FOR APACHE SERVERS
+### ---------------------------------------------
+### Check out the Ultimate Apache Bad Bot Blocker
+### ---------------------------------------------
