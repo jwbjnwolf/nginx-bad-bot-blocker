@@ -1,0 +1,110 @@
+#!/bin/bash
+
+#### Ensure are on dev branch
+git checkout dev
+####
+
+#### Get latest abuseIPDB 10k IP list
+echo "Getting latest abuseIPDB 10k IP list"
+  source scripts/_abuseIPDB.key
+  curl -Gs https://api.abuseipdb.com/api/v2/blacklist \
+    -d confidenceMinimum=90 \
+    -H "Key: $abuseIPDB_KEY" \
+    -H "Accept: text/plain" \
+    -o _generator_lists/bad-ip-addresses.list
+echo "done"
+####
+
+#### Get latest lists from mitchellkrogza's repos
+echo "Getting latest lists from mitchellkrogza's repos"
+  upstreamlists="https://raw.githubusercontent.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/refs/heads/master/_generator_lists"
+  upstreamlists_apache="https://raw.githubusercontent.com/mitchellkrogza/apache-ultimate-bad-bot-blocker/refs/heads/master/_generator_lists"
+  files=(
+    "allowed-user-agents.list"
+    "bad-referrers.list"
+    "bad-user-agents.list"
+    "bing-ip-ranges.list"
+    "bunnycdn-net.list"
+    "cloudflare-ip-ranges.list"
+    "fake-googlebots.list"
+    "good-user-agents.list"
+    "google-ip-ranges.list"
+    "limited-user-agents.list"
+    "nibbler-seo.list"
+    "seo-analysis-tools.list"
+    "wordpress-theme-detectors.list"
+  )
+  files_apache=(
+    "bad-user-agents-fail2ban-additional.list"
+    "wordpress-theme-detectors-apache.list"
+  )
+  for file in "${files[@]}"; do
+    curl -s $upstreamlists/$file \
+      -o _generator_lists/$file
+  done
+  for file in "${files_apache[@]}"; do
+    curl -s $upstreamlists_apache/$file \
+      -o _generator_lists/$file
+  done
+echo "done"
+####
+
+#### Remove user agents for fedi compatability from bad-user-agents.list
+allowed_agents="_generator_lists/allowed-user-agents-fedi.list"
+bad_agents="_generator_lists/bad-user-agents.list"
+temp_file="_generator_lists/temp_bad_user_agents.list"
+
+echo "Removing user agents for fedi compatability from bad-user-agents.list"
+  grep -v -F -f "$allowed_agents" "$bad_agents" > "$temp_file"
+  mv "$temp_file" "$bad_agents"
+echo "done"
+####
+
+#### Add additional user agents to bad-user-agents.list
+extra_agents="_generator_lists/added-bad-user-agents.list"
+echo "Adding additional user agents to bad-user-agents.list"
+  cat "$bad_agents" "$extra_agents" | sort -u > "$temp_file"
+  mv "$temp_file" "$bad_agents"
+echo "done"
+####
+
+#### Change good user agents to bad
+notgood_agents="_generator_lists/good-to-bad-user-agents.list"
+good_agents="_generator_lists/good-user-agents.list"
+bad_agents="_generator_lists/bad-user-agents.list"
+temp_file="_generator_lists/temp_bad_user_agents.list"
+
+echo "Removing good user agents that should be bad from good-user-agents.list"
+  grep -v -F -f "$notgood_agents" "$good_agents" > "$temp_file"
+  mv "$temp_file" "$good_agents"
+echo "done"
+
+echo "Adding the removed good user agents to bad-user-agents.list"
+  cat "$bad_agents" "$notgood_agents" | sort -u > "$temp_file"
+  mv "$temp_file" "$bad_agents"
+echo "done"
+####
+
+#### Get latest tor exits list from torproject.org & remove matches from bad-ip-addresses.list
+tor_ips="_generator_lists/tor-exit-nodes.list"
+bad_ips="_generator_lists/bad-ip-addresses.list"
+temp_file="_generator_lists/temp_bad_ip-addresses.list"
+
+echo "Getting latest tor exits list from torproject.org"
+  curl -s https://check.torproject.org/torbulkexitlist \
+    -o $tor_ips
+echo "done"
+
+echo "Removing tor exit node matches from bad-ip-addresses.list"
+  grep -v -F -f "$tor_ips" "$bad_ips" > "$temp_file"
+  mv "$temp_file" "$bad_ips"
+echo "done"
+####
+
+#### Generate Referrers Regex list
+./_compiling/generate-regex-format-referrers-nginx.sh
+####
+
+#### Compile blocklist
+./_compiling/compile-blocklist-nginx.sh
+####

@@ -6,10 +6,11 @@
 * Also mirrored on [Github](https://github.com/jwbjnwolf/nginx-bad-bot-blocker), but please github users of this fork, migrate to using either Codeberg or Forgejo.
 
 ## Why this fork?
-The default configuration for this blocker interferes with fedi software, such as Mastodon/GoToSocial/IceShrimp/Akkoma from federating correctly.<br>
-It also blocks a lot of Tor exit nodes as a result of them getting caught up in bad traffic.<br>
-This fork exists to solve this, so it's suitable for fedi admins and people who wish to have their services available to tor users.<br>
-Also in addition to the above purposes, I've made the  `deny.conf` compatible for running [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away) behind this blocker.
+* The default configuration for this blocker interferes with fedi software, such as Mastodon/GoToSocial/IceShrimp/Akkoma from federating correctly.<br>
+* It also blocks a lot of Tor exit nodes as a result of them getting caught up in bad traffic.<br>
+* This semi hard fork of the project exists to solve this, so it's suitable for fedi admins and people who wish to have their services available to tor users. This is achieved by having a list of keywords for removal, along with retrieving the list of all Tor exit nodes from TorProject to remove matches.<br>
+* Also in addition to the above purposes, I've made the  `deny.conf` compatible for running [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away) behind this blocker.<br>
+* And lastly, this is a semi hard fork which is able to stay working and updated, even when upstream is broken. I used to just merge and comment out matches. Now I generate the blocklist independantly using the lists provided from upstream, plus my own, and most importantly, retrieve the 10,000 top reported IP list from AbuseIPDB's api directly. You still should use instructions from upstream for installation though.
 
 ## Problem:
 - The `deny.conf` behavior of blocking dot file/folder requests doesn't exclude `.well-known`, that fedi software needs to crawl to federate properly.
@@ -18,10 +19,10 @@ Also in addition to the above purposes, I've made the  `deny.conf` compatible fo
 - Many tor exit node IPs get caught up in bad traffic, reported to AbuseIPDB in overwhelming numbers and end up in the `globalblacklist.conf` list as a result. There's only a finite amount of these nodes so even one block can be very noticable as a Tor user, and needing to refresh the exit node as a result, which isn't optimal.
 
 ## Changes:
-- In `deny.conf`, add an exclusion for `.well-known` requests: [Edits](../../../commit/d3459217f2394ac9ed50d1fcac0cd7b323637c7f).
-- In `deny.conf`, in order for [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away) to work, add exclusions for `.within-website` and `.git.` requests (not to be confused with `.git`): [Edits 1](../../../commit/c7cb0d953b4bd617bb1015806c22ff7e2cf9c72c), [Edits 2](../../../commit/d2f413aed36620593ee202e0472833b6dd41d678).
-- In `deny.conf`, comment out the image hotlinking section so hotlinking isn't prevented: [Edits](../../../commit/13b8798f04dfffd58d9d22224b7ec3e660398da5).
-- In `deny.conf`, if you want to block fedi blocklist scrapers, add a block for `/api/v1/blocks` & `/api/v1/peers` requests: [Edits](../../../commit/660f5d55a19c672d3a837128dda181bee98e40ef).
+- In `deny.conf`, add an exclusion for `.well-known` requests: [Edits](../../../commit/3de818248d71e2c03ad3569805f2e209ce9b60c3).
+- In `deny.conf`, in order for [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away) to work, add exclusions for `.within-website` and `.git.` requests (not to be confused with `.git`): [Edits](../../../commit/da9669657274ce53f435d9dfad7df1a31016ae07).
+- In `deny.conf`, comment out the image hotlinking section so hotlinking isn't prevented: [Edits](../../../commit/37f484d327bfe9807b5f400d0d8cb1adb9bfd4b5).
+- In `deny.conf`, if you want to block fedi blocklist scrapers, add a block for `/api/v1/blocks` & `/api/v1/peers` requests: [Edits](../../../commit/801866a748ab784dae432b9e41cca9278d45be48).
 - In `globalblacklist.conf`, comment out problem user-agent keyword blocks so they don't cause false positives: See below for list.
 - In `globalblacklist.conf`, changed the very not good bot "AdsBot-Google" to be blocked. ADs can get in the damn bin.
 - In `globalblacklist.conf`, added some AI crawler bots to be blocked that aren't currently present.
@@ -29,9 +30,9 @@ Also in addition to the above purposes, I've made the  `deny.conf` compatible fo
 
 ## How to use this fork instead of upstream:
 - Follow instructions for installing files from the [upstream repo](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/blob/master/MANUAL-CONFIGURATION.md).
-- Edit your `deny.conf` file with the changes provided in these two commits as also stated above: [Commit 1](../../../commit/d3459217f2394ac9ed50d1fcac0cd7b323637c7f), [Commit 2](../../../commit/13b8798f04dfffd58d9d22224b7ec3e660398da5).
-- If you want to deny fedi blocklist scrapers access to the peers and blocks api routes, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits](../../../commit/660f5d55a19c672d3a837128dda181bee98e40ef).
-- If you use Anubis or go-away, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits 1](../../../commit/c7cb0d953b4bd617bb1015806c22ff7e2cf9c72c), [Edits 2](../../../commit/d2f413aed36620593ee202e0472833b6dd41d678).
+- Edit your `deny.conf` file with the changes provided in these two commits as also stated above: [Commit 1](../../../commit/3de818248d71e2c03ad3569805f2e209ce9b60c3), [Commit 2](../../../commit/37f484d327bfe9807b5f400d0d8cb1adb9bfd4b5).
+- If you want to deny fedi blocklist scrapers access to the peers and blocks api routes, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits](../../../commit/801866a748ab784dae432b9e41cca9278d45be48).
+- If you use Anubis or go-away, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits](../../../commit/da9669657274ce53f435d9dfad7df1a31016ae07).
 - Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/d516896054398363a6ec8eb85cc2752afecec42a).
 - Alternatively, point your updater script to the configuration hosted on my Codeberg mirror: [Edits](../../../commit/bf87f7c276cdf4801b54fc2afa606e971ccf4ac4).
 
@@ -42,7 +43,7 @@ Also in addition to the above purposes, I've made the  `deny.conf` compatible fo
   - You can and I do recommend to use this blocker as a first layor of defence before proxying through proof of work challenge AI bot blockers such as [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away). But like stated above, you will need to make changes to your `deny.conf` since the challenge makes use of dotFolders. Anubis uses `<path>/.within.website`, and go-away uses `<path>/.well-known/.git.gammaspectra.live`. Please note that other proof of work challenge blockers haven't been tested against so you need to use caution if you don't use either of these. Though if one uses `<path>/.git.<something>` for it's challenge then it'll work.
   
 
-## User-agent Keywords commented out:
+## User-agent Keywords removed:
 ```
 - Alligator,
 - Anarchie,
