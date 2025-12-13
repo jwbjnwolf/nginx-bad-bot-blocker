@@ -51,7 +51,7 @@ echo "Creating blocklist. Please hold."
     # BAD UA (User-Agent) Strings That We Block Outright
     # --------------------------------------------------
         BAD_BOTS_LIST=""; sorted_list=$(sort -u "$BadBots")
-        while read -r bot; do BAD_BOTS_LIST+="\"~*(?:\\b)$bot(?:\\b)\"		3;\n"; done <<< "$sorted_list"
+        while read -r bot; do BAD_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		3;\n"; done <<< "$sorted_list"
 
         # START BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
         sed -i '' "s|!!!!BAD-BOTS-LIST-HERE!!!!|$BAD_BOTS_LIST|g" "$TempFile"
@@ -60,11 +60,11 @@ echo "Creating blocklist. Please hold."
     # GOOD UA User-Agent Strings We Know and Trust
     # --------------------------------------------
         GOOD_BOTS_LIST=""; sorted_list=$(sort -u "$GoodBots")
-        while read -r bot; do GOOD_BOTS_LIST+="\"~*(?:\\b)$bot(?:\\b)\"		0;\n"; done <<< "$sorted_list"
+        while read -r bot; do GOOD_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		0;\n"; done <<< "$sorted_list"
         ALLOWED_BOTS_LIST=""; sorted_list=$(sort -u "$AllowedBots")
-        while read -r bot; do ALLOWED_BOTS_LIST+="\"~*(?:\\b)$bot(?:\\b)\"		1;\n"; done <<< "$sorted_list"
+        while read -r bot; do ALLOWED_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		1;\n"; done <<< "$sorted_list"
         LIMITED_BOTS_LIST=""; sorted_list=$(sort -u "$LimitedBots")
-        while read -r bot; do LIMITED_BOTS_LIST+="\"~*(?:\\b)$bot(?:\\b)\"		2;\n"; done <<< "$sorted_list"
+        while read -r bot; do LIMITED_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		2;\n"; done <<< "$sorted_list"
 
         # START GOOD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
         sed -i '' "s|!!!!GOOD-BOTS-LIST-HERE!!!!|$GOOD_BOTS_LIST|g" "$TempFile"
