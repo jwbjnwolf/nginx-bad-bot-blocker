@@ -25,22 +25,6 @@ echo "Creating blocklist. Please hold."
     OutputFile="./conf.d/globalblacklist.conf"
     BuildFile="./_compiling/buildnumber.nginx"
     cp $TemplateFile $TempFile
-    ### Lists
-    AllowedBots="./_generator_lists/allowed-user-agents.list"
-    BadIPs="./_generator_lists/bad-ip-addresses.list"
-    BadReferrers="./_generator_lists/bad-referrers.list"
-        BadReferrersRegex="./_compiling/referrers-regex-format-nginx.txt"
-    BadBots="./_generator_lists/bad-user-agents.list"
-    BingIPs="./_generator_lists/bing-ip-ranges.list"
-    BunnyIPs="./_generator_lists/bunnycdn-net.list"
-    CloudflareIPs="./_generator_lists/cloudflare-ip-ranges.list"
-    FakeGoogleIPs="./_generator_lists/fake-googlebots.list"
-    GoodBots="./_generator_lists/good-user-agents.list"
-    GoogleIPs="./_generator_lists/google-ip-ranges.list"
-    LimitedBots="./_generator_lists/limited-user-agents.list"
-    NibblerIPs="./_generator_lists/nibbler-seo.list"
-    SEOIPs="./_generator_lists/seo-analysis-tools.list"
-    WPBotIPs="./_generator_lists/wordpress-theme-detectors.list"
 ###################################################
 ### Files
 
@@ -50,6 +34,8 @@ echo "Creating blocklist. Please hold."
     # --------------------------------------------------
     # BAD UA (User-Agent) Strings That We Block Outright
     # --------------------------------------------------
+        BadBots="./_generator_lists/bad-user-agents.list"
+    
         BAD_BOTS_LIST=""; sorted_list=$(sort -u "$BadBots")
         while read -r bot; do BAD_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		3;\n"; done <<< "$sorted_list"
 
@@ -59,6 +45,10 @@ echo "Creating blocklist. Please hold."
     # --------------------------------------------
     # GOOD UA User-Agent Strings We Know and Trust
     # --------------------------------------------
+        GoodBots="./_generator_lists/good-user-agents.list"
+        AllowedBots="./_generator_lists/allowed-user-agents.list"
+        LimitedBots="./_generator_lists/limited-user-agents.list"
+
         GOOD_BOTS_LIST=""; sorted_list=$(sort -u "$GoodBots")
         while read -r bot; do GOOD_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		0;\n"; done <<< "$sorted_list"
         ALLOWED_BOTS_LIST=""; sorted_list=$(sort -u "$AllowedBots")
@@ -84,6 +74,9 @@ echo "Creating blocklist. Please hold."
 # =======================================
 # BEGIN SECTION 2 - REFERRERS AND DOMAINS
 # =======================================
+    BadReferrers="./_generator_lists/bad-referrers.list"
+    BadReferrersRegex="./_compiling/referrers-regex-format-nginx.txt"
+
     BAD_REFERRERS_LIST=""
     while IFS= read -r line; do BAD_REFERRERS_LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$BadReferrersRegex"
     BAD_REFERRERS_LIST=${BAD_REFERRERS_LIST%\\n}
@@ -101,6 +94,12 @@ echo "Creating blocklist. Please hold."
     # ---------
     # Blocking
     # ---------
+        FakeGoogleIPs="./_generator_lists/fake-googlebots.list"
+        WPBotIPs="./_generator_lists/wordpress-theme-detectors.list"
+        NibblerIPs="./_generator_lists/nibbler-seo.list"
+        SEOIPs="./_generator_lists/seo-analysis-tools.list"
+        BadIPs="./_generator_lists/bad-ip-addresses.list"
+
         FAKE_GOOGLEBOTS_LIST=""; sorted_list=$(sort -u "$FakeGoogleIPs")
         while read -r ip; do FAKE_GOOGLEBOTS_LIST+=$ip"		1;\n"; done <<< "$sorted_list"
         WORDPRESS_BOTS_LIST=""; sorted_list=$(sort -u "$WPBotIPs")
@@ -134,6 +133,11 @@ echo "Creating blocklist. Please hold."
     # ---------
     # Allowing
     # ---------
+        GoogleIPs="./_generator_lists/google-ip-ranges.list"
+        BingIPs="./_generator_lists/bing-ip-ranges.list"
+        CloudflareIPs="./_generator_lists/cloudflare-ip-ranges.list"
+        BunnyIPs="./_generator_lists/bunnycdn-net.list"    
+    
         GOOGLE_IP_LIST=""; sorted_list=$(sort -u "$GoogleIPs")
         while read -r ip; do GOOGLE_IP_LIST+=$ip"		0;\n"; done <<< "$sorted_list"
         BING_IP_LIST=""; sorted_list=$(sort -u "$BingIPs")
