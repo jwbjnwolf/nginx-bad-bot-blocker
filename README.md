@@ -23,10 +23,9 @@
 - In `deny.conf`, in order for [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away) to work, add exclusions for `.within-website` and `.git.` requests (not to be confused with `.git`): [Edits](../../../commit/da9669657274ce53f435d9dfad7df1a31016ae07).
 - In `deny.conf`, comment out the image hotlinking section so hotlinking isn't prevented: [Edits](../../../commit/37f484d327bfe9807b5f400d0d8cb1adb9bfd4b5).
 - In `deny.conf`, if you want to block fedi blocklist scrapers, add a block for `/api/v1/blocks` & `/api/v1/peers` requests: [Edits](../../../commit/801866a748ab784dae432b9e41cca9278d45be48).
-- In `globalblacklist.conf`, comment out problem user-agent keyword blocks so they don't cause false positives: See below for list.
+- In `globalblacklist.conf`, updated the blocklist generating script to remove problem user-agent keyword blocks and matches of any tor exit node IPs (synced from check.torproject.com) so they don't cause false positives. See below for the user agent keyword list that's been removed.
 - In `globalblacklist.conf`, changed the very not good bot "AdsBot-Google" to be blocked. ADs can get in the damn bin.
 - In `globalblacklist.conf`, added some AI crawler bots to be blocked that aren't currently present.
-- Added a bash script to routinely comment out Tor exit node IPs in `globalblacklist.conf` when I sync from upstream. The exit node list is retrieved from check.torproject.org.
 
 ## How to use this fork instead of upstream:
 - Follow instructions for installing files from the [upstream repo](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/blob/master/MANUAL-CONFIGURATION.md).
