@@ -49,10 +49,25 @@ echo "Getting latest lists from mitchellkrogza's repos"
 echo "done"
 ####
 
-#### Remove user agents for fedi compatability from bad-user-agents.list
-allowed_agents="_generator_lists/allowed-user-agents-fedi.list"
+#### Get latest AI.Robots.txt list and add to bad-user-agents.list
+ai_robots_txt="_generator_lists/ai-robots-txt.list"
 bad_agents="_generator_lists/bad-user-agents.list"
 temp_file="_generator_lists/temp_bad_user_agents.list"
+
+echo "Getting latest AI.Robots.txt list"
+  curl -s https://raw.githubusercontent.com/ai-robots-txt/ai.robots.txt/refs/heads/main/robots.txt \
+    -o $ai_robots_txt
+  sed -i '' -e 's/^User-agent: //g' -e '/^Disallow: /d' "$ai_robots_txt"
+echo "done"
+
+echo "Adding AI.Robots.txt list to bad-user-agents.list"
+  cat "$bad_agents" <(grep -vxF -f "$bad_agents" "$ai_robots_txt") | sort -u > "$temp_file"
+  mv "$temp_file" "$bad_agents"
+echo "done"
+####
+
+#### Remove user agents for fedi compatability from bad-user-agents.list
+allowed_agents="_generator_lists/allowed-user-agents-fedi.list"
 
 echo "Removing user agents for fedi compatability from bad-user-agents.list"
   grep -v -F -x -f "$allowed_agents" "$bad_agents" > "$temp_file"
