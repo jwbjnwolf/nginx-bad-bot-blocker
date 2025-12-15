@@ -55,7 +55,7 @@ bad_agents="_generator_lists/bad-user-agents.list"
 temp_file="_generator_lists/temp_bad_user_agents.list"
 
 echo "Removing user agents for fedi compatability from bad-user-agents.list"
-  grep -v -F -f "$allowed_agents" "$bad_agents" > "$temp_file"
+  grep -v -F -x -f "$allowed_agents" "$bad_agents" > "$temp_file"
   mv "$temp_file" "$bad_agents"
 echo "done"
 ####
