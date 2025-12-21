@@ -125,10 +125,6 @@ echo "Getting latest Oliphant Unified Tier 0 fedi blocklist"
 echo "done"
 ####
 
-#### Generate Referrers Regex list
-./_compiling/generate-regex-format-referrers-nginx.sh
-####
-
 #### Compile blocklist
 ./_compiling/compile-blocklist-nginx.sh
 ####
