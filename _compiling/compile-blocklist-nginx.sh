@@ -35,13 +35,20 @@ echo "Creating blocklist. Please hold."
     # BAD UA (User-Agent) Strings That We Block Outright
     # --------------------------------------------------
         BadBots="./_generator_lists/bad-user-agents.list"
+        OliphantBadBots="./_generator_lists/oliphant_unified_tier0.list"
     
         BAD_BOTS_LIST=""; sorted_list=$(sort -u "$BadBots")
         while read -r bot; do BAD_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		3;\n"; done <<< "$sorted_list"
+        OLIPHANT_BAD_BOTS_LIST=""; sorted_list=$(sort -u "$OliphantBadBots")
+        while read -r bot; do OLIPHANT_BAD_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		3;\n"; done <<< "$sorted_list"
 
         # START BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
         sed -i '' "s|!!!!BAD-BOTS-LIST-HERE!!!!|$BAD_BOTS_LIST|g" "$TempFile"
         # END BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
+        # START OLIPHANT TIER 0 FEDI BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+        sed -i '' "s|!!!!OLIPHANT-BAD-BOTS-LIST-HERE!!!!|$OLIPHANT_BAD_BOTS_LIST|g" "$TempFile"
+        # END OLIPHANT TIER 0 FEDI BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
     # --------------------------------------------
     # GOOD UA User-Agent Strings We Know and Trust
     # --------------------------------------------
@@ -76,14 +83,23 @@ echo "Creating blocklist. Please hold."
 # =======================================
     BadReferrers="./_generator_lists/bad-referrers.list"
     BadReferrersRegex="./_compiling/referrers-regex-format-nginx.txt"
+    OliphantBadReferrersRegex="./_compiling/oliphant-regex-format-nginx.txt"
 
     BAD_REFERRERS_LIST=""
     while IFS= read -r line; do BAD_REFERRERS_LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$BadReferrersRegex"
     BAD_REFERRERS_LIST=${BAD_REFERRERS_LIST%\\n}
 
+    OLIPHANT_BAD_REFERRERS_LIST=""
+    while IFS= read -r line; do OLIPHANT_BAD_REFERRERS_LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$OliphantBadReferrersRegex"
+    OLIPHANT_BAD_REFERRERS_LIST=${OLIPHANT_BAD_REFERRERS_LIST%\\n}
+
     # START BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
     sed -i '' "s|!!!!BAD-REFERRERS-LIST-HERE!!!!|$BAD_REFERRERS_LIST|g" "$TempFile"
     # END BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+
+    # START OLIPHANT TIER 0 FEDI BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+    sed -i '' "s|!!!!OLIPHANT-BAD-REFERRERS-LIST-HERE!!!!|$OLIPHANT_BAD_REFERRERS_LIST|g" "$TempFile"
+    # END OLIPHANT TIER 0 FEDI BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
 # =======================================
 # END SECTION 2 - REFERRERS AND DOMAINS
 # =======================================
