@@ -35,45 +35,61 @@ echo "Creating blocklist. Please hold."
     # BAD UA (User-Agent) Strings That We Block Outright
     # --------------------------------------------------
         BadBots="./_generator_lists/bad-user-agents.list"
+
+            tmp=$(mktemp)
+            sort "$BadBots" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     3;" >> "$tmp"; done
+            LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
+
+            # START BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+            sed -i '' "s|!!!!BAD-BOTS-LIST-HERE!!!!|$LIST|g" "$TempFile"
+            rm "$tmp"
+            # END BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
         OliphantBadBots="./_generator_lists/oliphant_unified_tier0.list"
-    
-        BAD_BOTS_LIST=""; sorted_list=$(sort -u "$BadBots")
-        while read -r bot; do BAD_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		3;\n"; done <<< "$sorted_list"
-        OLIPHANT_BAD_BOTS_LIST=""; sorted_list=$(sort -u "$OliphantBadBots")
-        while read -r bot; do OLIPHANT_BAD_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		3;\n"; done <<< "$sorted_list"
 
-        # START BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!BAD-BOTS-LIST-HERE!!!!|$BAD_BOTS_LIST|g" "$TempFile"
-        # END BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+            tmp=$(mktemp)
+            sort "$OliphantBadBots" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     3;" >> "$tmp"; done
+            LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
 
-        # START OLIPHANT TIER 0 FEDI BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!OLIPHANT-BAD-BOTS-LIST-HERE!!!!|$OLIPHANT_BAD_BOTS_LIST|g" "$TempFile"
-        # END OLIPHANT TIER 0 FEDI BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+            # START OLIPHANT TIER 0 FEDI BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+            sed -i '' "s|!!!!OLIPHANT-BAD-BOTS-LIST-HERE!!!!|$LIST|g" "$TempFile"
+            rm "$tmp"
+            # END OLIPHANT TIER 0 FEDI BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
     # --------------------------------------------
     # GOOD UA User-Agent Strings We Know and Trust
     # --------------------------------------------
         GoodBots="./_generator_lists/good-user-agents.list"
+
+            tmp=$(mktemp)
+            sort "$GoodBots" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     0;" >> "$tmp"; done
+            LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
+
+            # START GOOD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+            sed -i '' "s|!!!!GOOD-BOTS-LIST-HERE!!!!|$LIST|g" "$TempFile"
+            rm "$tmp"
+            # END GOOD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
         AllowedBots="./_generator_lists/allowed-user-agents.list"
+
+            tmp=$(mktemp)
+            sort "$AllowedBots" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     1;" >> "$tmp"; done
+            LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
+
+            # START ALLOWED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+            sed -i '' "s|!!!!ALLOWED-BOTS-LIST-HERE!!!!|$LIST|g" "$TempFile"
+            rm "$tmp"
+            # END ALLOWED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
         LimitedBots="./_generator_lists/limited-user-agents.list"
 
-        GOOD_BOTS_LIST=""; sorted_list=$(sort -u "$GoodBots")
-        while read -r bot; do GOOD_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		0;\n"; done <<< "$sorted_list"
-        ALLOWED_BOTS_LIST=""; sorted_list=$(sort -u "$AllowedBots")
-        while read -r bot; do ALLOWED_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		1;\n"; done <<< "$sorted_list"
-        LIMITED_BOTS_LIST=""; sorted_list=$(sort -u "$LimitedBots")
-        while read -r bot; do LIMITED_BOTS_LIST+="\"~*(?:\\\b)$bot(?:\\\b)\"		2;\n"; done <<< "$sorted_list"
+            tmp=$(mktemp)
+            sort "$LimitedBots" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     2;" >> "$tmp"; done
+            LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
 
-        # START GOOD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!GOOD-BOTS-LIST-HERE!!!!|$GOOD_BOTS_LIST|g" "$TempFile"
-        # END GOOD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-
-        # START ALLOWED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!ALLOWED-BOTS-LIST-HERE!!!!|$ALLOWED_BOTS_LIST|g" "$TempFile"
-        # END ALLOWED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-
-        # START LIMITED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!LIMITED-BOTS-LIST-HERE!!!!|$LIMITED_BOTS_LIST|g" "$TempFile"
-        # END LIMITED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+            # START LIMITED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+            sed -i '' "s|!!!!LIMITED-BOTS-LIST-HERE!!!!|$LIST|g" "$TempFile"
+            rm "$tmp"
+            # END LIMITED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
 # ===========================
 # END SECTION 1 - USER-AGENTS
 # ===========================
@@ -82,24 +98,26 @@ echo "Creating blocklist. Please hold."
 # BEGIN SECTION 2 - REFERRERS AND DOMAINS
 # =======================================
     BadReferrers="./_generator_lists/bad-referrers.list"
-    BadReferrersRegex="./_compiling/referrers-regex-format-nginx.txt"
-    OliphantBadReferrersRegex="./_compiling/oliphant-regex-format-nginx.txt"
 
-    BAD_REFERRERS_LIST=""
-    while IFS= read -r line; do BAD_REFERRERS_LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$BadReferrersRegex"
-    BAD_REFERRERS_LIST=${BAD_REFERRERS_LIST%\\n}
+        tmp=$(mktemp)
+        sort "$BadReferrers" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\" 1;" >> "$tmp"; done
+        LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
 
-    OLIPHANT_BAD_REFERRERS_LIST=""
-    while IFS= read -r line; do OLIPHANT_BAD_REFERRERS_LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$OliphantBadReferrersRegex"
-    OLIPHANT_BAD_REFERRERS_LIST=${OLIPHANT_BAD_REFERRERS_LIST%\\n}
+        # START BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+        sed -i '' "s|!!!!BAD-REFERRERS-LIST-HERE!!!!|$LIST|g" "$TempFile"
+        rm "$tmp"
+        # END BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
 
-    # START BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
-    sed -i '' "s|!!!!BAD-REFERRERS-LIST-HERE!!!!|$BAD_REFERRERS_LIST|g" "$TempFile"
-    # END BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+    OliphantBadReferrers="./_generator_lists/oliphant_unified_tier0.list"
 
-    # START OLIPHANT TIER 0 FEDI BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
-    sed -i '' "s|!!!!OLIPHANT-BAD-REFERRERS-LIST-HERE!!!!|$OLIPHANT_BAD_REFERRERS_LIST|g" "$TempFile"
-    # END OLIPHANT TIER 0 FEDI BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+        tmp=$(mktemp)
+        sort "$OliphantBadReferrers" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\" 1;" >> "$tmp"; done
+        LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
+
+        # START OLIPHANT BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+        sed -i '' "s|!!!!OLIPHANT-BAD-REFERRERS-LIST-HERE!!!!|$LIST|g" "$TempFile"
+        rm "$tmp"
+        # END OLIPHANT BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
 # =======================================
 # END SECTION 2 - REFERRERS AND DOMAINS
 # =======================================
