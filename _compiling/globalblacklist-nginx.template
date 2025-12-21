@@ -154,6 +154,10 @@ map $http_user_agent $bad_bot {
 !!!!BAD-BOTS-LIST-HERE!!!!
 # END BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
 
+# START OLIPHANT TIER 0 FEDI BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!OLIPHANT-BAD-BOTS-LIST-HERE!!!!
+# END OLIPHANT TIER 0 FEDI BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
 # --------------------------------------------
 # GOOD UA User-Agent Strings We Know and Trust
 # --------------------------------------------
@@ -379,6 +383,10 @@ map $http_referer $bad_referer {
 # START BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
 !!!!BAD-REFERRERS-LIST-HERE!!!!
 # END BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+
+# START OLIPHANT TIER 0 FEDI BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!OLIPHANT-BAD-REFERRERS-LIST-HERE!!!!
+# END OLIPHANT TIER 0 FEDI BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
 }
 
 # =====================================
