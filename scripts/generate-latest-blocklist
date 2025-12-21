@@ -116,6 +116,15 @@ echo "Removing tor exit node matches from bad-ip-addresses.list"
 echo "done"
 ####
 
+#### Get latest Oliphant Unified Tier 0 fedi blocklist
+oliphant_tier0="_generator_lists/oliphant_unified_tier0.list"
+
+echo "Getting latest Oliphant Unified Tier 0 fedi blocklist"
+  curl -s https://raw.githubusercontent.com/sgrigson/oliphant/refs/heads/main/blocklists/_unified_tier0_blocklist.csv | \
+  sed '1d' | cut -d',' -f1 > "$oliphant_tier0"
+echo "done"
+####
+
 #### Generate Referrers Regex list
 ./_compiling/generate-regex-format-referrers-nginx.sh
 ####
