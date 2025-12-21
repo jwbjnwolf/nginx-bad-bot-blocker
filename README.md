@@ -26,6 +26,7 @@
 - In `globalblacklist.conf`, updated the blocklist generating script to remove problem user-agent keyword blocks and matches of any tor exit node IPs (synced from check.torproject.com) so they don't cause false positives. See below for the user agent keyword list that's been removed.
 - In `globalblacklist.conf`, changed the very not good bot "AdsBot-Google" to be blocked. ADs can get in the damn bin.
 - In `globalblacklist.conf`, added some AI crawler bots to be blocked that aren't currently present.
+- In `globalblacklist.conf`, added user agent and referrer blocks from [Oliphant's Unified Tier 0 Blocklist](https://writer.oliphant.social/oliphant/the-oliphant-social-blocklist), because fuck nazis.
 
 ## How to use this fork instead of upstream:
 - Follow instructions for installing files from the [upstream repo](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/blob/master/MANUAL-CONFIGURATION.md).
