@@ -25,8 +25,48 @@ echo "Creating blocklist. Please hold."
     OutputFile="./conf.d/globalblacklist.conf"
     BuildFile="./_compiling/buildnumber.nginx"
     cp $TemplateFile $TempFile
+    ###
+    ### Reused files
+    BadBots="./_generator_lists/bad-user-agents.list"
+    BadReferrers="./_generator_lists/bad-referrers.list"
+    Oliphant="./_generator_lists/oliphant_unified_tier0.list"
+    ###
 ###################################################
-### Files
+
+### Functions
+###################################################
+    ### User agents & referrers
+    generate_list() {
+        local list="$1"
+        local num="$2"
+        local placeholder="$3"
+        local tmp
+        tmp=$(mktemp) 
+        
+        sort "$list" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     $num;" >> "$tmp"; done
+        LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
+        sed -i '' "s|$placeholder|$LIST|g" "$TempFile"
+        rm "$tmp"
+    }
+    ###
+    ### IPs
+    generate_list_ips() {
+        local list="$1"
+        local num="$2"
+        local placeholder="$3"
+
+        LIST=""; sorted_list=$(sort -u "$list"); while read -r line; do LIST+="$line    $num;\n"; done <<< "$sorted_list"
+        sed -i '' "s|$placeholder|$LIST|g" "$TempFile"
+    }
+    generate_list_ips_wp() {
+        local list="$1"
+        local placeholder="$2"
+
+        LIST=""; sorted_list=$(sort -u "$list"); while read -r line; do LIST+="$line\n"; done <<< "$sorted_list"
+        sed -i '' "s|$placeholder|$LIST|g" "$TempFile"
+    }
+    ###
+###################################################
 
 # =============================
 # BEGIN SECTION 1 - USER-AGENTS
@@ -34,62 +74,14 @@ echo "Creating blocklist. Please hold."
     # --------------------------------------------------
     # BAD UA (User-Agent) Strings That We Block Outright
     # --------------------------------------------------
-        BadBots="./_generator_lists/bad-user-agents.list"
-
-            tmp=$(mktemp)
-            sort "$BadBots" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     3;" >> "$tmp"; done
-            LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
-
-            # START BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-            sed -i '' "s|!!!!BAD-BOTS-LIST-HERE!!!!|$LIST|g" "$TempFile"
-            rm "$tmp"
-            # END BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-
-        OliphantBadBots="./_generator_lists/oliphant_unified_tier0.list"
-
-            tmp=$(mktemp)
-            sort "$OliphantBadBots" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     3;" >> "$tmp"; done
-            LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
-
-            # START OLIPHANT TIER 0 FEDI BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-            sed -i '' "s|!!!!OLIPHANT-BAD-BOTS-LIST-HERE!!!!|$LIST|g" "$TempFile"
-            rm "$tmp"
-            # END OLIPHANT TIER 0 FEDI BAD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+        generate_list "$BadBots" 3 "!!!!BAD-BOTS-LIST-HERE!!!!"
+        generate_list "$Oliphant" 3 "!!!!OLIPHANT-BAD-BOTS-LIST-HERE!!!!"
     # --------------------------------------------
     # GOOD UA User-Agent Strings We Know and Trust
     # --------------------------------------------
-        GoodBots="./_generator_lists/good-user-agents.list"
-
-            tmp=$(mktemp)
-            sort "$GoodBots" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     0;" >> "$tmp"; done
-            LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
-
-            # START GOOD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-            sed -i '' "s|!!!!GOOD-BOTS-LIST-HERE!!!!|$LIST|g" "$TempFile"
-            rm "$tmp"
-            # END GOOD BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-
-        AllowedBots="./_generator_lists/allowed-user-agents.list"
-
-            tmp=$(mktemp)
-            sort "$AllowedBots" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     1;" >> "$tmp"; done
-            LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
-
-            # START ALLOWED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-            sed -i '' "s|!!!!ALLOWED-BOTS-LIST-HERE!!!!|$LIST|g" "$TempFile"
-            rm "$tmp"
-            # END ALLOWED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-
-        LimitedBots="./_generator_lists/limited-user-agents.list"
-
-            tmp=$(mktemp)
-            sort "$LimitedBots" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     2;" >> "$tmp"; done
-            LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
-
-            # START LIMITED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
-            sed -i '' "s|!!!!LIMITED-BOTS-LIST-HERE!!!!|$LIST|g" "$TempFile"
-            rm "$tmp"
-            # END LIMITED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+        generate_list "./_generator_lists/good-user-agents.list" 0 "!!!!GOOD-BOTS-LIST-HERE!!!!"
+        generate_list "./_generator_lists/allowed-user-agents.list" 1 "!!!!ALLOWED-BOTS-LIST-HERE!!!!"
+        generate_list "./_generator_lists/limited-user-agents.list" 2 "!!!!LIMITED-BOTS-LIST-HERE!!!!"
 # ===========================
 # END SECTION 1 - USER-AGENTS
 # ===========================
@@ -97,27 +89,8 @@ echo "Creating blocklist. Please hold."
 # =======================================
 # BEGIN SECTION 2 - REFERRERS AND DOMAINS
 # =======================================
-    BadReferrers="./_generator_lists/bad-referrers.list"
-
-        tmp=$(mktemp)
-        sort "$BadReferrers" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\" 1;" >> "$tmp"; done
-        LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
-
-        # START BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!BAD-REFERRERS-LIST-HERE!!!!|$LIST|g" "$TempFile"
-        rm "$tmp"
-        # END BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
-
-    OliphantBadReferrers="./_generator_lists/oliphant_unified_tier0.list"
-
-        tmp=$(mktemp)
-        sort "$OliphantBadReferrers" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\" 1;" >> "$tmp"; done
-        LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
-
-        # START OLIPHANT BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!OLIPHANT-BAD-REFERRERS-LIST-HERE!!!!|$LIST|g" "$TempFile"
-        rm "$tmp"
-        # END OLIPHANT BAD REFERRERS ### DO NOT EDIT THIS LINE AT ALL ###
+    generate_list "$BadReferrers" 1 "!!!!BAD-REFERRERS-LIST-HERE!!!!"
+    generate_list "$Oliphant" 1 "!!!!OLIPHANT-BAD-REFERRERS-LIST-HERE!!!!"
 # =======================================
 # END SECTION 2 - REFERRERS AND DOMAINS
 # =======================================
@@ -128,74 +101,18 @@ echo "Creating blocklist. Please hold."
     # ---------
     # Blocking
     # ---------
-        FakeGoogleIPs="./_generator_lists/fake-googlebots.list"
-        WPBotIPs="./_generator_lists/wordpress-theme-detectors.list"
-        NibblerIPs="./_generator_lists/nibbler-seo.list"
-        SEOIPs="./_generator_lists/seo-analysis-tools.list"
-        BadIPs="./_generator_lists/bad-ip-addresses.list"
-
-        FAKE_GOOGLEBOTS_LIST=""; sorted_list=$(sort -u "$FakeGoogleIPs")
-        while read -r ip; do FAKE_GOOGLEBOTS_LIST+=$ip"		1;\n"; done <<< "$sorted_list"
-        WORDPRESS_BOTS_LIST=""; sorted_list=$(sort -u "$WPBotIPs")
-        while read -r ip; do WORDPRESS_BOTS_LIST+=$ip"\n"; done <<< "$sorted_list"
-        NIBBLER_LIST=""; sorted_list=$(sort -u "$NibblerIPs")
-        while read -r ip; do NIBBLER_LIST+=$ip"		1;\n"; done <<< "$sorted_list"
-        SEO_LIST=""; sorted_list=$(sort -u "$SEOIPs")
-        while read -r ip; do SEO_LIST+=$ip"		1;\n"; done <<< "$sorted_list"
-        BAD_IP_LIST=""; sorted_list=$(sort -u "$BadIPs")
-        while read -r ip; do BAD_IP_LIST+=$ip"		1;\n"; done <<< "$sorted_list"
-
-        # START FAKE GOOGLEBOTS ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!FAKE-GOOGLEBOTS-LIST-HERE!!!!|$FAKE_GOOGLEBOTS_LIST|g" "$TempFile"
-        # END FAKE GOOGLEBOTS ### DO NOT EDIT THIS LINE AT ALL ###
-
-        # START WP THEME DETECTORS ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!WORDPRESS-BOTS-LIST-HERE!!!!|$WORDPRESS_BOTS_LIST|g" "$TempFile"
-        # END WP THEME DETECTORS ### DO NOT EDIT THIS LINE AT ALL ###
-
-        # START NIBBLER ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!NIBBLER-LIST-HERE!!!!|$NIBBLER_LIST|g" "$TempFile"
-        # END NIBBLER ### DO NOT EDIT THIS LINE AT ALL ###
-
-        # START SEO ANALYSIS TOOLS ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!SEO-LIST-HERE!!!!|$SEO_LIST|g" "$TempFile"
-        # END SEO ANALYSIS TOOLS ### DO NOT EDIT THIS LINE AT ALL ###
-
-        # START KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!BAD-IP-LIST-HERE!!!!|$BAD_IP_LIST|g" "$TempFile"
-        # END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###s
+        generate_list_ips "./_generator_lists/fake-googlebots.list" 1 "!!!!FAKE-GOOGLEBOTS-LIST-HERE!!!!"
+        generate_list_ips_wp "./_generator_lists/wordpress-theme-detectors.list" "!!!!WORDPRESS-BOTS-LIST-HERE!!!!"
+        generate_list_ips "./_generator_lists/nibbler-seo.list" 1 "!!!!NIBBLER-LIST-HERE!!!!"
+        generate_list_ips "./_generator_lists/seo-analysis-tools.list" 1 "!!!!SEO-LIST-HERE!!!!"
+        generate_list_ips "./_generator_lists/bad-ip-addresses.list" 1 "!!!!BAD-IP-LIST-HERE!!!!"
     # ---------
     # Allowing
-    # ---------
-        GoogleIPs="./_generator_lists/google-ip-ranges.list"
-        BingIPs="./_generator_lists/bing-ip-ranges.list"
-        CloudflareIPs="./_generator_lists/cloudflare-ip-ranges.list"
-        BunnyIPs="./_generator_lists/bunnycdn-net.list"    
-    
-        GOOGLE_IP_LIST=""; sorted_list=$(sort -u "$GoogleIPs")
-        while read -r ip; do GOOGLE_IP_LIST+=$ip"		0;\n"; done <<< "$sorted_list"
-        BING_IP_LIST=""; sorted_list=$(sort -u "$BingIPs")
-        while read -r ip; do BING_IP_LIST+=$ip"		0;\n"; done <<< "$sorted_list"
-        CLOUDFLARE_IP_LIST=""; sorted_list=$(sort -u "$CloudflareIPs")
-        while read -r ip; do CLOUDFLARE_IP_LIST+=$ip"		0;\n"; done <<< "$sorted_list"
-        BUNNY_IP_LIST=""; sorted_list=$(sort -u "$BunnyIPs")
-        while read -r ip; do BUNNY_IP_LIST+=$ip"		0;\n"; done <<< "$sorted_list"
-
-        # START GOOGLE IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!GOOGLE-IP-LIST-HERE!!!!|$GOOGLE_IP_LIST|g" "$TempFile"
-        # END GOOGLE IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
-
-        # START BING IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!BING-IP-LIST-HERE!!!!|$BING_IP_LIST|g" "$TempFile"
-        # END BING IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
-
-        # START CLOUDFLARE IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!CLOUDFLARE-IP-LIST-HERE!!!!|$CLOUDFLARE_IP_LIST|g" "$TempFile"
-        # END CLOUDFLARE IP RANGES ### DO NOT EDIT THIS LINE AT ALL ###
-
-        # START BUNNY.NET CDN ### DO NOT EDIT THIS LINE AT ALL ###
-        sed -i '' "s|!!!!BUNNY-IP-LIST-HERE!!!!|$BUNNY_IP_LIST|g" "$TempFile"
-        # END BUNNY.NET CDN ### DO NOT EDIT THIS LINE AT ALL ###    
+    # ---------    
+        generate_list_ips "./_generator_lists/google-ip-ranges.list" 0 "!!!!GOOGLE-IP-LIST-HERE!!!!"
+        generate_list_ips "./_generator_lists/bing-ip-ranges.list" 0 "!!!!BING-IP-LIST-HERE!!!!"
+        generate_list_ips "./_generator_lists/cloudflare-ip-ranges.list" 0 "!!!!CLOUDFLARE-IP-LIST-HERE!!!!"
+        generate_list_ips "./_generator_lists/bunnycdn-net.list" 0 "!!!!BUNNY-IP-LIST-HERE!!!!"
 # ========================================================================
 # END SECTION 3 - WHITELISTING AND BLACKLISTING IP ADDRESSESE AND RANGES
 # ========================================================================
