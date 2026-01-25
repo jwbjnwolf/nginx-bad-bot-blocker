@@ -164,6 +164,7 @@ FDM
 FHscan
 FacebookBot
 Factset_spyderbot
+FediBigData
 FemtosearchBot
 Fimap
 FirecrawlAgent
@@ -366,7 +367,6 @@ Nutch
 OAI-SearchBot
 Offline\ Explorer
 Offline\ Navigator
-Omgilibot
 OnCrawl
 OpenAI
 OpenLinkProfiler
