@@ -66,7 +66,6 @@
 - Cosmos,
 - Crescent,
 - Curious,
-- Custo,
 
 - Demon,
 - Devil,
@@ -92,12 +91,10 @@
 - Ninja,
 
 - Octopus,
-- Obot,
 - Pump,
 
 - Reaper,
 - Ripper,
-- Ripz,
 
 - Screaming,
 - Snake,
