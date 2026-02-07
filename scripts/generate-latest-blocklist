@@ -61,7 +61,7 @@ echo "Getting latest AI.Robots.txt list"
 echo "done"
 
 echo "Adding AI.Robots.txt list to bad-user-agents.list"
-  cat "$bad_agents" <(grep -vxF -f "$bad_agents" "$ai_robots_txt") | sort -u > "$temp_file"
+  cat "$bad_agents" <(grep -ivxFf "$bad_agents" "$ai_robots_txt") | sort -u > "$temp_file"
   mv "$temp_file" "$bad_agents"
 echo "done"
 ####
@@ -70,7 +70,7 @@ echo "done"
 allowed_agents="_generator_lists/allowed-user-agents-fedi.list"
 
 echo "Removing user agents for fedi compatability from bad-user-agents.list"
-  grep -v -F -x -f "$allowed_agents" "$bad_agents" > "$temp_file"
+  grep -ivxFf "$allowed_agents" "$bad_agents" > "$temp_file"
   mv "$temp_file" "$bad_agents"
 echo "done"
 ####
@@ -90,7 +90,7 @@ bad_agents="_generator_lists/bad-user-agents.list"
 temp_file="_generator_lists/temp_bad_user_agents.list"
 
 echo "Removing good user agents that should be bad from good-user-agents.list"
-  grep -v -F -f "$notgood_agents" "$good_agents" > "$temp_file"
+  grep -ivFf "$notgood_agents" "$good_agents" > "$temp_file"
   mv "$temp_file" "$good_agents"
 echo "done"
 
@@ -111,7 +111,7 @@ echo "Getting latest tor exits list from torproject.org"
 echo "done"
 
 echo "Removing tor exit node matches from bad-ip-addresses.list"
-  grep -v -F -f "$tor_ips" "$bad_ips" > "$temp_file"
+  grep -ivFf "$tor_ips" "$bad_ips" > "$temp_file"
   mv "$temp_file" "$bad_ips"
 echo "done"
 ####
