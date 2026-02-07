@@ -128,7 +128,11 @@
 ## Added user agents to be blocked:
 ```
 - Ai[0-9]bot (AI2 Bot & AI2 Bot-Dolma specifically but [0-9] for just incase),
+- Bot/Research-Public,
 - FediBigData,
+- fediblock.manalejandro.com,
+- FediList Agent,
+- Go-http-client,
 - WellKnownBot.
 
 And also AI user agent list from https://github.com/ai-robots-txt/ai.robots.txt
