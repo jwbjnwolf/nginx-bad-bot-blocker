@@ -4,7 +4,6 @@
 404enemy
 80legs
 ADmantX
-AI2Bot
 AI2Bot-DeepResearchEval
 AIBOT
 ALittle\ Client
@@ -63,6 +62,7 @@ Black\ Hole
 Blackboard
 BlowFish
 Boardreader
+Bot/Research-Public
 BotALot
 Brandprotect
 Brandwatch
@@ -166,6 +166,7 @@ FHscan
 FacebookBot
 Factset_spyderbot
 FediBigData
+FediList Agent
 FemtosearchBot
 Fimap
 FirecrawlAgent
@@ -191,6 +192,7 @@ Getintent
 Gigabot
 Go!Zilla
 Go-Ahead-Got-It
+Go-http-client/2.0
 GoZilla
 Google-CloudVertexBot
 Google-Extended
@@ -369,7 +371,6 @@ OAI-SearchBot
 Offline\ Explorer
 Offline\ Navigator
 OnCrawl
-OpenAI
 OpenLinkProfiler
 OpenVAS
 Openfind
@@ -395,7 +396,6 @@ Pavuk
 PeoplePal
 Perplexity-User
 PerplexityBot
-PetalBot
 Petalbot
 PhindBot
 Pi-Monster
@@ -617,7 +617,6 @@ Wotbox
 Wprecon
 Xaldon\ WebSpider
 Xaldon_WebSpider
-YaK
 YandexAdditional
 YandexAdditionalBot
 YouBot
@@ -632,7 +631,6 @@ ZoominfoBot
 ZumBot
 ZyBorg
 adscanner
-aiHitBot
 allenai.org
 amazon-kendra
 anthropic-ai
@@ -666,7 +664,7 @@ evc-batch
 everyfeed-spider
 facebookexternalhit
 facebookscraper
-gopher
+fediblock.manalejandro.com
 heritrix
 iAskBot
 iaskspider
@@ -724,7 +722,6 @@ sogouspider
 sp_auditbot
 spyfu
 sysscan
-tAkeOut
 trendiction.com
 trendiction.de
 ubermetrics-technologies.com
