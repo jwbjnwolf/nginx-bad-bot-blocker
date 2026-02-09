@@ -20,9 +20,10 @@
 
 ## Changes:
 - In `deny.conf`, add an exclusion for `.well-known` requests: [Edits](../../../commit/3de818248d71e2c03ad3569805f2e209ce9b60c3).
-- In `deny.conf`, in order for [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away) to work, add exclusions for `.within-website` and `.git.` requests (not to be confused with `.git`): [Edits](../../../commit/da9669657274ce53f435d9dfad7df1a31016ae07).
 - In `deny.conf`, comment out the image hotlinking section so hotlinking isn't prevented: [Edits](../../../commit/37f484d327bfe9807b5f400d0d8cb1adb9bfd4b5).
-- In `deny.conf`, if you want to block fedi blocklist scrapers, add a block for `/api/v1/blocks` & `/api/v1/peers` requests: [Edits](../../../commit/801866a748ab784dae432b9e41cca9278d45be48).
+- In `deny.conf`, if you want to block fedi blocklist scrapers, add a block for `/api/v1/blocks`, `api/v1/instance/domain_blocks` & `/api/v1/peers` requests: [Commit 1](../../../commit/801866a748ab784dae432b9e41cca9278d45be48) & [Commit 2](../../../commit/5b027cb7e1a627b830b6c5c5c4b85261c5151d71).
+- In `deny.conf`, block empty/blank user agents. [Edits](../../../e4d62f391d2b3d0424027755a0873d7f2679cf2d).
+- In `deny.conf`, in order for [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away) to work, add exclusions for `.within-website` and `.git.` requests (not to be confused with `.git`): [Edits](../../../commit/da9669657274ce53f435d9dfad7df1a31016ae07).
 - In `globalblacklist.conf`, updated the blocklist generating script to remove problem user-agent keyword blocks and matches of any tor exit node IPs (synced from check.torproject.com) so they don't cause false positives. See below for the user agent keyword list that's been removed.
 - In `globalblacklist.conf`, changed the very not good bot "AdsBot-Google" to be blocked. ADs can get in the damn bin.
 - In `globalblacklist.conf`, added some AI crawler bots to be blocked that aren't currently present.
@@ -30,9 +31,7 @@
 
 ## How to use this fork instead of upstream:
 - Follow instructions for installing files from the [upstream repo](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/blob/master/MANUAL-CONFIGURATION.md).
-- Edit your `deny.conf` file with the changes provided in these two commits as also stated above: [Commit 1](../../../commit/3de818248d71e2c03ad3569805f2e209ce9b60c3), [Commit 2](../../../commit/37f484d327bfe9807b5f400d0d8cb1adb9bfd4b5).
-- If you want to deny fedi blocklist scrapers access to the peers and blocks api routes, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits](../../../commit/801866a748ab784dae432b9e41cca9278d45be48).
-- If you use Anubis or go-away, edit your `deny.conf` file with the changes provided in this commit as also stated above: [Edits](../../../commit/da9669657274ce53f435d9dfad7df1a31016ae07).
+- Edit your `deny.conf` file with the above listed changes where wanted.
 - Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/d516896054398363a6ec8eb85cc2752afecec42a).
 - Alternatively, point your updater script to the configuration hosted on my Codeberg mirror: [Edits](../../../commit/bf87f7c276cdf4801b54fc2afa606e971ccf4ac4).
 
