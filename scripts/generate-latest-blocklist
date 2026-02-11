@@ -125,6 +125,15 @@ echo "Getting latest Oliphant Unified Tier 0 fedi blocklist"
 echo "done"
 ####
 
+#### Get latest build number from mitchellkrogza's repos
+echo "Get latest build number from mitchellkrogza's repos"
+  curl -s https://raw.githubusercontent.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/refs/heads/master/dev-tools/buildnumber \
+      -o _compiling/buildnumber.nginx
+  #curl -s https://raw.githubusercontent.com/mitchellkrogza/apache-ultimate-bad-bot-blocker/refs/heads/master/dev-tools/buildnumber \
+  #   -o _compiling/buildnumber.apache
+echo "done"
+####
+
 #### Compile blocklist
 ./_compiling/compile-blocklist-nginx.sh
 ####
