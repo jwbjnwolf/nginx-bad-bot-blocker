@@ -54,16 +54,18 @@ echo "Creating blocklist. Please hold."
         local list="$1"
         local num="$2"
         local placeholder="$3"
+        local tmp
+        tmp=$(mktemp)
 
-        LIST=""; sorted_list=$(sort -u "$list"); while read -r line; do LIST+="$line    $num;\n"; done <<< "$sorted_list"
-        sed -i '' "s|$placeholder|$LIST|g" "$TempFile"
+        sort -u "$list" | while IFS= read -r line; do echo "$line   $num;" >> "$tmp"; done
+        sed -i '' "/$placeholder/r $tmp" "$TempFile"; sed -i '' "/$placeholder/d" "$TempFile"
+        rm "$tmp"
     }
     generate_list_ips_wp() {
         local list="$1"
         local placeholder="$2"
 
-        LIST=""; sorted_list=$(sort -u "$list"); while read -r line; do LIST+="$line\n"; done <<< "$sorted_list"
-        sed -i '' "s|$placeholder|$LIST|g" "$TempFile"
+        sed -i '' "/$placeholder/r $list" "$TempFile"; sed -i '' "/$placeholder/d" "$TempFile"
     }
     ###
 ###################################################
