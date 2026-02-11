@@ -1,17 +1,41 @@
 #!/bin/bash
 
-#### Ensure are on main branch
-git checkout main
+#### Ensure are on borestad branch
+git checkout borestad
 ####
 
-#### Get latest abuseIPDB 10k IP list
+#### Get latest abuseIPDB 10k IP list and combine with latest borestad abuseipdb-s100-1d list
 echo "Getting latest abuseIPDB 10k IP list"
+  abuseipdb_list="_generator_lists/abuseipdb-10k.list"
   source scripts/_abuseIPDB.key
   curl -Gs https://api.abuseipdb.com/api/v2/blacklist \
     -d confidenceMinimum=90 \
     -H "Key: $abuseIPDB_KEY" \
     -H "Accept: text/plain" \
-    -o _generator_lists/bad-ip-addresses.list
+    -o _generator_lists/abuseipdb-10k.list
+echo "done"
+
+echo "Getting latest borestad abuseipdb-s100-1d list"
+  borestad_list="_generator_lists/abuseipdb-borestad.list"
+  temp_file="_generator_lists/temp_abuseipdb-borestad.list"
+
+  curl -s https://raw.githubusercontent.com/borestad/blocklist-abuseipdb/refs/heads/main/abuseipdb-s100-1d.ipv4 \
+  -o $borestad_list
+  
+  grep -v '^#' $borestad_list | cut -d ' ' -f 1 > $temp_file
+  mv "$temp_file" "$borestad_list"
+echo "done"
+
+echo "Combining abuseIPDB 10k IP list & borestad abuseipdb-s100-1d list as bad-ip-addresses.list"
+  abuseipdb_list="_generator_lists/abuseipdb-10k.list"
+  borestad_list="_generator_lists/abuseipdb-borestad.list"
+  bad_ips="_generator_lists/bad-ip-addresses.list"
+  temp_file="_generator_lists/temp_bad_ip-addresses.list"
+
+  cat $borestad_list $abuseipdb_list | sort -u > $temp_file
+  mv "$temp_file" "$bad_ips"
+
+  rm $abuseipdb_list $borestad_list
 echo "done"
 ####
 

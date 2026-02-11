@@ -11,8 +11,8 @@
 #                                                                            #
 ##############################################################################
 
-#### Ensure are on main branch
-git checkout main
+#### Ensure are on borestad branch
+git checkout borestad
 ####
 
 echo "Creating blocklist. Please hold."
