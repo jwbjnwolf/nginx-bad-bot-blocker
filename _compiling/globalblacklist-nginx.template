@@ -255,7 +255,7 @@ map $http_referer $bad_words {
 # START WHITELISTED DOMAINS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
 # ------------------------------------------------------------------------
 
-  	include /etc/nginx/bots.d/whitelist-domains.conf;
+  include /etc/nginx/bots.d/whitelist-domains.conf;
 
 # ----------------------------------------------------------------------  	
 # END WHITELISTED DOMAINS ### DO NOT EDIT OR REMOVE THIS LINE AT ALL ###
@@ -412,7 +412,6 @@ geo $validate_client {
 !!!!FAKE-GOOGLEBOTS-LIST-HERE!!!!
 # END FAKE GOOGLEBOTS ### DO NOT EDIT THIS LINE AT ALL ###
 
-
 # -------------------------------------
 # BLOCK known Wordpress Theme Detectors
 # -------------------------------------
@@ -431,17 +430,13 @@ geo $validate_client {
 !!!!NIBBLER-LIST-HERE!!!!
 # END NIBBLER ### DO NOT EDIT THIS LINE AT ALL ###
 
-
 # ----------------------------------------------
 # BLOCK KNOWN - SEO testing and reporting tools
 # ----------------------------------------------
 
-
 # START SEO ANALYSIS TOOLS ### DO NOT EDIT THIS LINE AT ALL ###
 !!!!SEO-LIST-HERE!!!!
 # END SEO ANALYSIS TOOLS ### DO NOT EDIT THIS LINE AT ALL ###
-
-
 
 # -----------------------------------------
 # BLOCK KNOWN BAD IP ADDRESSES
@@ -450,25 +445,6 @@ geo $validate_client {
 
 # START KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
 !!!!BAD-IP-LIST-HERE!!!!
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
-# END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
 # END KNOWN BAD IP ADDRESSES ### DO NOT EDIT THIS LINE AT ALL ###
 
 # --------------------------
@@ -502,8 +478,6 @@ geo $validate_client {
 # START BUNNY.NET CDN ### DO NOT EDIT THIS LINE AT ALL ###
 !!!!BUNNY-IP-LIST-HERE!!!!
 # END BUNNY.NET CDN ### DO NOT EDIT THIS LINE AT ALL ###
-
-
 
 # -------------------------------------------------
 # BLACKLIST IP addresses and IP Ranges Customizable
