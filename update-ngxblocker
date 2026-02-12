@@ -332,7 +332,7 @@ get_options() {
 }
 
 main() {
-	local REPO=https://codeberg.org/jasewolf/nginx-bad-bot-blocker-mirror/raw/branch/main
+	local REPO=https://codeberg.org/jasewolf/nginx-bad-bot-blocker-mirror/raw/branch/borestad
 	local file=globalblacklist.conf remote_dir=conf.d url= output= update= status= tmp= retval=
 	local nginx_path=$(find_binary nginx)
 	local pidof_path=$(find_binary pidof)
