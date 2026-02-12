@@ -22,7 +22,7 @@
 
 # Save this file as /usr/local/sbin/update-ngxblocker
 # cd /usr/local/sbin
-# sudo wget https://codeberg.org/jasewolf/nginx-bad-bot-blocker-mirror/raw/branch/main/update-ngxblocker -O update-ngxblocker
+# sudo wget https://wolfi.ee/jase/nginx-bad-bot-blocker-mirror/raw/branch/main/update-ngxblocker -O update-ngxblocker
 # Make it Executable chmod 700 /usr/local/sbin/update-ngxblocker
 
 # RUN THE UPDATE
@@ -332,7 +332,7 @@ get_options() {
 }
 
 main() {
-	local REPO=https://codeberg.org/jasewolf/nginx-bad-bot-blocker-mirror/raw/branch/borestad
+	local REPO=https://wolfi.ee/jase/nginx-bad-bot-blocker-mirror/raw/branch/main
 	local file=globalblacklist.conf remote_dir=conf.d url= output= update= status= tmp= retval=
 	local nginx_path=$(find_binary nginx)
 	local pidof_path=$(find_binary pidof)
