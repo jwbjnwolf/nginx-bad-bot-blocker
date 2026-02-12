@@ -34,12 +34,13 @@
 - Edit your `deny.conf` file with the above listed changes where wanted.
 - Edit your `update-ngxblocker` updater script to point to the configuration hosted here: [Edits](../../../commit/d516896054398363a6ec8eb85cc2752afecec42a).
 - Alternatively, point your updater script to the configuration hosted on my Codeberg mirror: [Edits](../../../commit/bf87f7c276cdf4801b54fc2afa606e971ccf4ac4).
+- Want a 74k IP blocklist instead of the standard 10k list provided by abuseIPDB? Point your updater script to my [borestad](https://github.com/borestad/blocklist-abuseipdb) variant of the list: [Edits for Forgejo](../../../commit/ef25860992894f974426086eb8b7d11dcf775fa1), [Edits for Codeberg mirror](../../../commit/6e453d94e876ef823d8558da2aff2ddae0063684).
 
 ## Important `deny.conf` notes:
-- **Self hosted Git Repos**:
-  - Please ensure you do not include the `deny.conf` in any server blocks or location blocks for git repositories such as Forgejo to ensure the repos function as intended. Using it with a git repo that has dotFiles for example will result in the dot files in the repo being inaccessible, and same goes for every other denied path.
-- **Proof of Work challenge AI bot blockers**:
-  - You can and I do recommend to use this blocker as a first layor of defence before proxying through proof of work challenge AI bot blockers such as [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away). But like stated above, you will need to make changes to your `deny.conf` since the challenge makes use of dotFolders. Anubis uses `<path>/.within.website`, and go-away uses `<path>/.well-known/.git.gammaspectra.live`. Please note that other proof of work challenge blockers haven't been tested against so you need to use caution if you don't use either of these. Though if one uses `<path>/.git.<something>` for it's challenge then it'll work.
+- **Self hosted Git Repos**:<br>
+  Please ensure you do not include the `deny.conf` in any server blocks or location blocks for git repositories such as Forgejo to ensure the repos function as intended. Using it with a git repo that has dotFiles for example will result in the dot files in the repo being inaccessible, and same goes for every other denied path.
+- **Proof of Work challenge AI bot blockers**:<br>
+  You can and I do recommend to use this blocker as a first layor of defence before proxying through proof of work challenge AI bot blockers such as [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away). But like stated above, you will need to make changes to your `deny.conf` since the challenge makes use of dotFolders. Anubis uses `<path>/.within.website`, and go-away uses `<path>/.well-known/.git.gammaspectra.live`. Please note that other proof of work challenge blockers haven't been tested against so you need to use caution if you don't use either of these. Though if one uses `<path>/.git.<something>` for it's challenge then it'll work.
   
 
 ## User-agent Keywords removed:
@@ -132,6 +133,7 @@
 - fediblock.manalejandro.com,
 - FediList Agent,
 - Go-http-client,
+- silver.inc,
 - WellKnownBot.
 
 And also AI user agent list from https://github.com/ai-robots-txt/ai.robots.txt
