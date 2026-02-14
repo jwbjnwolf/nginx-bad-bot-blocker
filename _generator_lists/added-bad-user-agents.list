@@ -1,9 +1,16 @@
 Ai[0-9]bot
+amazon-bedrock-agentcore-browser
 amazon-q
+amzn-user
+amzn-searchbot
+anchor-browser
 Apache-HttpClient
 awario-smart-bot
+azureai-searchbot
+bigsur-ai
 Bot/Research-Public
 browserbase
+cloudflare-browser-rendering
 coveobot
 criteobot
 Cyberstation
@@ -14,6 +21,7 @@ google-ads-creatives-assistant
 Go-http-client
 gpt-actions
 iasbot
+kagi-fetcher
 libredtail-http
 proximicbot
 quantcastbot
