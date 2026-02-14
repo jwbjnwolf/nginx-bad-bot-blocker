@@ -1,13 +1,10 @@
 Ai[0-9]bot
 amazon-bedrock-agentcore-browser
 amazon-q
-amzn-user
-amzn-searchbot
 anchor-browser
 Anthropic-Claude
 Apache-HttpClient
 awario-smart-bot
-azureai-searchbot
 Bard-Ai
 bigsur-ai
 Bot/Research-Public
@@ -28,7 +25,6 @@ Go-http-client
 gpt-actions
 HuggingFace-Bot
 iasbot
-kagi-fetcher
 libredtail-http
 proximicbot
 quantcastbot
