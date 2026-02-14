@@ -78,7 +78,7 @@ echo "done"
 #### Add additional user agents to bad-user-agents.list
 extra_agents="_generator_lists/added-bad-user-agents.list"
 echo "Adding additional user agents to bad-user-agents.list"
-  cat "$bad_agents" "$extra_agents" | sort -u > "$temp_file"
+  cat "$bad_agents" <(grep -ivxFf "$bad_agents" "$extra_agents") | sort -u > "$temp_file"
   mv "$temp_file" "$bad_agents"
 echo "done"
 ####
