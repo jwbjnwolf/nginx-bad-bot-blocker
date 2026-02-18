@@ -92,7 +92,7 @@ echo "Creating blocklist. Please hold."
 # BEGIN SECTION 2 - REFERRERS AND DOMAINS
 # =======================================
     generate_list "$BadReferrers" 1 "!!!!BAD-REFERRERS-LIST-HERE!!!!"
-    generate_list "$Oliphant" 1 "!!!!OLIPHANT-BAD-REFERRERS-LIST-HERE!!!!"
+    #generate_list "$Oliphant" 1 "!!!!OLIPHANT-BAD-REFERRERS-LIST-HERE!!!!"
 # =======================================
 # END SECTION 2 - REFERRERS AND DOMAINS
 # =======================================
