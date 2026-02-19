@@ -11,8 +11,8 @@
 #                                                                            #
 ##############################################################################
 
-#### Ensure are on dev branch
-git checkout dev
+#### Ensure are on main branch
+git checkout main
 ####
 
 echo "Creating blocklist. Please hold."
