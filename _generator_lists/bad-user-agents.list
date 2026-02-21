@@ -1,11 +1,13 @@
-01h4x.com
+1h4x\.com
 360Spider
 404checker
 404enemy
 80legs
 ADmantX
+AGI Agent
 AI2Bot-DeepResearchEval
 AIBOT
+AIWebIndex
 ALittle\ Client
 ASPSeek
 Abonti
@@ -16,6 +18,8 @@ AddSearchBot
 AdsBot-Google
 AdsTxtCrawlerTP
 AfD-Verbotsverfahren
+AgentDataBot
+AgentTimes
 AhrefsBot
 Ai2Bot
 Ai2Bot-Dolma
@@ -26,6 +30,7 @@ Alexibot
 Aliyun
 AliyunSecBot
 AllSubmitter
+Almanac
 AlphaBot
 AmazonBuyForMe
 Amazonbot
@@ -39,8 +44,11 @@ Anthill
 Anthropic-Claude
 Apache-HttpClient
 Apexoo
+ApifyBot
+ApifyWebsiteContentCrawler
 Applebot
 Applebot-Extended
+Aranet-SearchBot
 Aspiegel
 Asterias
 Atomseobot
@@ -63,6 +71,7 @@ BatchFTP
 Battleztar\ Bazinga
 BetaBot
 Bitacle
+BixelBot
 BlackWidow
 Black\ Hole
 Blackboard
@@ -73,6 +82,7 @@ BotALot
 Brandprotect
 Brandwatch
 Bravebot
+Brightbot
 Brightbot 1.0
 BuddyBot
 BuiltBotTough
@@ -82,9 +92,11 @@ BuzzSumo
 Bytespider
 CATExplorador
 CCBot
+CMS-Security-Auditor
 CODE87
 CSHttp
 Calculon
+CartAI Agentic Commerce
 CazoodleBot
 Cegbfeieh
 CensysInspect
@@ -100,21 +112,26 @@ ChinaClaw
 Chlooe
 Citoid
 Claritybot
+Claude-Code
 Claude-SearchBot
 Claude-User
 Claude-Web
 ClaudeBot
+CledaraBot
 Cliqzbot
 CloudVertexBot
 Cloud\ mapping
 Cloudflare-AutoRAG
+CloudflareBrowserRenderingCrawler
 Cocolyzebot
+Codex
 Cogentbot
 Cohere-Command
 CopyRightCheck
 Copyscape
 Cotoyogi
 Craftbot
+CragCrawler
 Crawl4AI
 Crawling\ at\ Home\ Project
 Crawlspace
@@ -134,6 +151,7 @@ DeepSeekBot
 Deusu
 Devin
 Diffbot
+Diffbot-User
 Digincore
 DigitalPebble
 Dirbuster
@@ -149,19 +167,25 @@ DomainCrawler
 DomainSigmaCrawler
 DomainStatsBot
 Domains\ Project
+Dot
 Dotbot
+DoubaoBot
 Download\ Wonder
 DuckAssistBot
-ECCP/1.0
+ECCP
 EMail\ Siphon
 EMail\ Wolf
+ERNIEBot
 EasyDL
 Ebingbong
 Echobot Bot
 EchoboxBot
 Ecxi
 EirGrabber
+ElevenlabsBot
 EroCrawler
+ExaSearchBot
+ExaUser
 Exabot
 Express\ WebPictures
 ExtLinksBot
@@ -179,7 +203,7 @@ FediList Agent
 FemtosearchBot
 Fimap
 FirecrawlAgent
-Firefox/7.0
+Firefox/7\.0
 FlashGet
 Flunky
 Foobot
@@ -192,9 +216,11 @@ GPTBot
 GT::WWW
 GalaxyBot
 GeedoProductSearch
+GeistHaus-PageFetcher
 Gemini-Ai
 Gemini-Deep-Research
 Genieo
+GenomeCrawlerd
 GermCrawler
 GetRight
 GetWeb
@@ -204,11 +230,14 @@ Go!Zilla
 Go-Ahead-Got-It
 Go-http-client
 GoZilla
+Google-Agent
 Google-CloudVertexBot
 Google-Extended
 Google-Firebase
+Google-Gemini-CLI
 Google-NotebookLM
 GoogleAgent-Mariner
+GoogleAgent-URLContext
 GoogleOther
 GoogleOther-Image
 GoogleOther-Video
@@ -219,6 +248,9 @@ Grafula
 GrapeFX
 GrapeshotCrawler
 GridBot
+Grok Bot
+GrokAppAndroid
+GrokBot
 Groq-Bot
 HEADMasterSEO
 HMView
@@ -227,12 +259,15 @@ HTTP::Lite
 HTTrack
 Haansoft
 HaosouSpider
+HarkBot
 Havij
+HenkBot
 Heritrix
 Hloader
 HonoluluBot
 HuggingFace-Bot
 Humanlinks
+Hunyuan
 HybridBot
 ICC-Crawler
 IDBTE4M
@@ -240,7 +275,6 @@ IDBot
 IRLbot
 ISSCyberRiskCrawler
 Iblog
-IbouBot
 Id-search
 IlseBot
 Image\ Fetch
@@ -252,6 +286,7 @@ InfoNaviRobot
 InfoTekies
 Information\ Security\ Team\ InfraSec\ Scanner
 InfraSec\ Scanner
+Instinct
 Intelliseek
 InterGET
 InternetMeasurement
@@ -271,9 +306,14 @@ Jorgee
 JustView
 Jyxobot
 Kangaroo Bot
+KeenableBot
 Kenjin\ Spider
 Keybot\ Translation-Search-Machine
 Keyword\ Density
+Kimi-Agent
+Kimi-SearchBot
+Kimi-User
+KimiBot
 KlaviyoAIBot
 Kozmosbot
 KunatoCrawler
@@ -290,6 +330,7 @@ Lftp
 LibWeb
 Libwhisker
 LieBaoFast
+Lightpanda
 Lightspeedsystems
 Likse
 LinerBot
@@ -342,19 +383,25 @@ Microsoft\ Data\ Access
 Microsoft\ URL\ Control
 Minefield
 Mister\ PiX
+MistralAI-Index
+MistralAI-Training
 MistralAI-User
 MistralAI-User/1.0
 Moblie\ Safari
 Mojolicious
 MolokaiBot
+MoonshotBot
 Morfeus\ Fucking\ Scanner
+Mozilla-Tabstack
 Mozlila
 Mr.4x3
 Msrabot
+Muse
 Musobot
 MyCentralAIScraperBot
 NICErsPRO
 NPbot
+NagetBot
 Name\ Intelligence
 Nameprotect
 Navroad
@@ -379,7 +426,9 @@ NotebookLM
 NovaAct
 Nuclei
 Nutch
+OAI-AdsBot
 OAI-SearchBot
+Odin
 Offline\ Explorer
 Offline\ Navigator
 OnCrawl
@@ -405,6 +454,7 @@ PanguBot
 Panscient
 Papa\ Foto
 Pavuk
+Payhawk Invoice Fetching Agent
 PeoplePal
 Perplexity-User
 PerplexityBot
@@ -430,9 +480,12 @@ Pu_iN
 PxBroker
 PyCurl
 QualifiedBot
+Querit-SearchBot
+QueritBot
 QueryN\ Metasearch
 Quick-Crawler
 QuillBot
+QwenBot
 RSSingBot
 Rainbot
 RankActive
@@ -448,6 +501,7 @@ RealDownload
 RebelMouse
 Recorder
 RedesScrapy
+Reflectionbot
 Replicate-Bot
 RepoMonkey
 RocketCrawler
@@ -455,6 +509,7 @@ Rogerbot
 RunPod-Bot
 SBIder
 SBIntuitionsBot
+SEBot-WA
 SEOkicks
 SEOkicks-Robot
 SEOlyt
@@ -462,6 +517,7 @@ SEOlyticsCrawler
 SEOprofiler
 SEOstats
 SISTRIX
+SMARTSEO-checker
 SMTBot
 SalesIntelligent
 ScanAlert
@@ -488,6 +544,7 @@ SeoCherryBot
 SeoSiteCheckup
 SeobilityBot
 Seomoz
+Shap-User
 ShapBot
 Shodan
 Sidetrade indexer bot
@@ -515,7 +572,6 @@ Spammen
 SpankBot
 Spbot
 Spider_Bot
-Spider_Bot/3.0
 Spinn3r
 SplitSignalBot
 SputnikBot
@@ -532,11 +588,14 @@ Swiftbot
 Szukacz
 T0PHackTeam
 T8Abot
+TLM-Audit-Scanner
+TMP
 TavilyBot
 TeleportPro
 Telesoft
 Telesphoreo
 Telesphorep
+Terra Cotta
 TerraCotta
 The\ Intraformant
 Thinkbot
@@ -547,8 +606,10 @@ Timpibot
 TinyTestBot
 Toata
 Together-Bot
+TongyiBot
 Toweyabot
 Tracemyfile
+Trae
 Trendiction
 Trendictionbot
 True_Robot
@@ -562,6 +623,7 @@ URLy.Warning
 URLy\ Warning
 UnisterBot
 Upflow
+UseAI
 V-BOT
 VB\ Project
 VCI
@@ -586,7 +648,6 @@ WWW-Mechanize
 WWW::Mechanize
 WWWOFFLE
 Wallpapers
-Wallpapers/3.0
 WallpapersHD
 WeSEE
 WebAuto
@@ -623,7 +684,7 @@ Website\ Quester
 Webzio-Extended
 WellKnownBot
 Whatweb
-Who.is\ Bot
+Who\.is\ Bot
 WinHTTrack
 WiseGuys\ Robot
 Wonderbot
@@ -634,6 +695,8 @@ Xaldon\ WebSpider
 Xaldon_WebSpider
 YandexAdditional
 YandexAdditionalBot
+YiBot
+YiyanBot
 YouBot
 YoudaoBot
 ZanistaBot
@@ -646,26 +709,28 @@ ZoominfoBot
 ZumBot
 ZyBorg
 adscanner
-allenai.org
+allenai\.org
+amazon-QBusiness
 amazon-bedrock-agentcore-browser
 amazon-kendra
 amazon-q
 anchor-browser
 anthropic-ai
 archive.org_bot
+aria2
 arquivo-web-crawler
-arquivo.pt
+arquivo\.pt
 atlassian-bot
 autoemailspider
 awario-smart-bot
-awario.com
+awario\.com
 backlink-check
 bedrockbot
 bigsur-ai
 bigsur.ai
 browserbase
-cah.io.community
-check1.exe
+cah\.io\.community
+check1\.exe
 clark-crawler
 cloudflare-browser-rendering
 coccocbot
@@ -674,20 +739,21 @@ cohere-ai
 cohere-training-data-crawler
 com.plumanalytics
 coveobot
-crawl.sogou.com
-crawler.feedback
+crawl\.sogou.com
 crawler4j
+crawler\.feedback
 criteobot
-dataforseo.com
+dataforseo\.com
 dataforseobot
 dataprovider
 demandbase-bot
-domainsproject.org
+domainsproject\.org
 eCatch
 evc-batch
 everyfeed-spider
 facebookexternalhit
 facebookscraper
+fasthttp
 fediblock.manalejandro.com
 google-ads-creatives-assistant
 gpt-actions
@@ -697,12 +763,12 @@ iasbot
 iaskspider
 iaskspider/2.0
 imageSpider
-imagesift.com
+imagesift\.com
 img2dataset
 instabid
 internetVista\ monitor
 ips-agent
-isitwp.com
+isitwp\.com
 iubenda-radar
 kagi-fetcher
 l9scan
@@ -711,6 +777,7 @@ leakix
 libredtail-http
 linkdexbot
 linkfluence
+litellm-recon
 lwp-request
 lwp-trivial
 magpie-crawler
@@ -720,13 +787,17 @@ meta-externalagent
 meta-externalfetcher
 meta-webindexer
 muhstik-scan
+nbot
 netEstate Imprint Crawler
 netEstate\ NE\ Crawler
+newsai
 oBot
 omgili
 omgilibot
 openai
-openai.com
+openai\.com
+opencode
+opendirme-credhunt
 page\ scorer
 panscient.com
 pcBrowser
@@ -734,15 +805,16 @@ plumanalytics
 polaris\ version
 probe-image-size
 proximicbot
+qodercli
 quantcastbot
 quillbot.com
 ripz
 rovo
 ryebot
-s1z.ru
-satoristudio.net
+s1z\.ru
+satoristudio\.net
 scalaj-http
-scan.lol
+scan\.lol
 semanticscholarbot
 seobility
 seocompany.store
@@ -752,29 +824,35 @@ seranking-backlinks
 serpstatbot
 sexsearcher
 silver.inc
-sitechecker.pro
+sitechecker\.pro
 siteripz
+smart-seo-tools\.sbs
 snapchatadsbot
 snapurlpreviewbot
 sogouspider
 sp_auditbot
+spy4x-domain-scanner
 spyfu
 sysscan
-trendiction.com
-trendiction.de
+terrabot-owned-you
+trafilatura
+trendiction\.com
+trendiction\.de
 twilio-knowledge
-ubermetrics-technologies.com
+ubermetrics-technologies\.com
 v0bot
-voyagerx.com
+voyagerx\.com
 webgains-bot
 webmeup-crawler
-webpros.com
+webpros\.com
 webprosbot
 webzio-extended
+wp2shell
 wpbot
 x09Mozilla
 x22Mozilla
 xAI-Bot
-xpymep1.exe
-zauba.io
+xAI-Grok
+xpymep1\.exe
+zauba\.io
 zgrab
