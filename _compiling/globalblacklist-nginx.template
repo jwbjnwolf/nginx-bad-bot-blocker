@@ -198,7 +198,19 @@ map $http_user_agent $bad_bot {
 !!!!LIMITED-BOTS-LIST-HERE!!!!
 # END LIMITED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
 
-}	
+}
+
+# -------------------------------------------------------
+# Super Good UA User-Agent Strings that should prevent an IP block
+# -------------------------------------------------------
+map $http_user_agent $super_allowed_bot {
+	default		0;
+
+# START SUPER ALLOWED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+!!!!SUPER-ALLOWED-BOTS-LIST-HERE!!!!
+# END SUPER ALLOWED BOTS ### DO NOT EDIT THIS LINE AT ALL ###
+
+}
 
 # ===========================
 # END SECTION 1 - USER-AGENTS
