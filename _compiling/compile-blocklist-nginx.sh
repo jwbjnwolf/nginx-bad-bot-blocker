@@ -84,6 +84,7 @@ echo "Creating blocklist. Please hold."
         generate_list "./_generator_lists/good-user-agents.list" 0 "!!!!GOOD-BOTS-LIST-HERE!!!!"
         generate_list "./_generator_lists/allowed-user-agents.list" 1 "!!!!ALLOWED-BOTS-LIST-HERE!!!!"
         generate_list "./_generator_lists/limited-user-agents.list" 2 "!!!!LIMITED-BOTS-LIST-HERE!!!!"
+        generate_list "./_generator_lists/allowed-user-agents-super.list" 1 "!!!!SUPER-ALLOWED-BOTS-LIST-HERE!!!!"
 # ===========================
 # END SECTION 1 - USER-AGENTS
 # ===========================
