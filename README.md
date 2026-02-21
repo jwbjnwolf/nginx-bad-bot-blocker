@@ -44,6 +44,12 @@
 - **Proof of Work challenge AI bot blockers**:<br>
   You can and I do recommend to use this blocker as a first layor of defence before proxying through proof of work challenge AI bot blockers such as [Anubis](https://github.com/TecharoHQ/anubis) or [go-away](https://git.gammaspectra.live/git/go-away). But like stated above, you will need to make changes to your `deny.conf` since the challenge makes use of dotFolders. Anubis uses `<path>/.within.website`, and go-away uses `<path>/.well-known/.git.gammaspectra.live`. Please note that other proof of work challenge blockers haven't been tested against so you need to use caution if you don't use either of these. Though if one uses `<path>/.git.<something>` for it's challenge then it'll work.
 
+## Important, Let's Encrypt http-01 validation:
+The IPs used by Let's Encrypt's validation server are very regularly ending up on AbuseIPDB's 100% confidence. The IPs used by Lets Encrypt are not disclosed and often changing, so removing their IPs from the `bad-ip-addresses.list` isn't really possible. I have instead added to the `globalblacklist.conf` a `$super-allowed-bot` map, which will disable the bad IP blocking for user agents in that list.<br>
+This is not enabled until you edit your `blockbots.conf` with the following change: [Edit](../../../commit/489a9f6ebabf371d6339c3736cfaab3ac9aeb979)<br>
+Keep in mind that this is a breaking change if you go back to using upstream's blocklist and will need to be changed back if you decide to do that.<br>
+This only as far as I'm aware is needed with http-01 validation. If you use dns-01 validation, Let's Encrypt doesn't need successful access to your server.
+
 ## User-agent Keywords removed:
 - See [_generator_lists/allowed-user-agents-fedi.list](../main/_generator_lists/allowed-user-agents-fedi.list) for user agents removed to be fedi friendly.
 
