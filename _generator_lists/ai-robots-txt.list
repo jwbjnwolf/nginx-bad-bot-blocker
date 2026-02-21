@@ -11,8 +11,11 @@ Amzn-User
 Andibot
 Anomura
 anthropic-ai
+ApifyBot
+ApifyWebsiteContentCrawler
 Applebot
 Applebot-Extended
+Aranet-SearchBot
 atlassian-bot
 Awario
 AzureAI-SearchBot
@@ -45,12 +48,14 @@ Diffbot
 DuckAssistBot
 Echobot Bot
 EchoboxBot
+ExaBot
 FacebookBot
 facebookexternalhit
 Factset_spyderbot
 FirecrawlAgent
 FriendlyCrawler
 Gemini-Deep-Research
+Google-Agent
 Google-CloudVertexBot
 Google-Extended
 Google-Firebase
@@ -88,7 +93,9 @@ meta-webindexer
 MistralAI-User
 MistralAI-User/1.0
 MyCentralAIScraperBot
+NagetBot
 netEstate Imprint Crawler
+newsai
 NotebookLM
 NovaAct
 OAI-SearchBot

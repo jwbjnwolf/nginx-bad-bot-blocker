@@ -39,8 +39,11 @@ Anthill
 Anthropic-Claude
 Apache-HttpClient
 Apexoo
+ApifyBot
+ApifyWebsiteContentCrawler
 Applebot
 Applebot-Extended
+Aranet-SearchBot
 Aspiegel
 Asterias
 Atomseobot
@@ -204,6 +207,7 @@ Go!Zilla
 Go-Ahead-Got-It
 Go-http-client
 GoZilla
+Google-Agent
 Google-CloudVertexBot
 Google-Extended
 Google-Firebase
@@ -355,6 +359,7 @@ Musobot
 MyCentralAIScraperBot
 NICErsPRO
 NPbot
+NagetBot
 Name\ Intelligence
 Nameprotect
 Navroad
@@ -722,6 +727,7 @@ meta-webindexer
 muhstik-scan
 netEstate Imprint Crawler
 netEstate\ NE\ Crawler
+newsai
 oBot
 omgili
 omgilibot
