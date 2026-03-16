@@ -4,6 +4,10 @@
 git checkout main
 ####
 
+#### sed -i mac & linux cross compatibility
+sed_i() { if [[ "$OSTYPE" == "darwin"* ]]; then sed -i '' "$@"; else sed -i "$@"; fi }
+####
+
 #### Get latest abuseIPDB 10k IP list
 echo "Getting latest abuseIPDB 10k IP list"
   source scripts/_abuseIPDB.key
@@ -57,7 +61,7 @@ temp_file="_generator_lists/temp_bad_user_agents.list"
 echo "Getting latest AI.Robots.txt list"
   curl -s https://raw.githubusercontent.com/ai-robots-txt/ai.robots.txt/refs/heads/main/robots.txt \
     -o $ai_robots_txt
-  sed -i '' -e 's/^User-agent: //g' -e '/^Disallow: /d' "$ai_robots_txt"
+  sed_i -e 's/^User-agent: //g' -e '/^Disallow: /d' "$ai_robots_txt"
 echo "done"
 
 echo "Adding AI.Robots.txt list to bad-user-agents.list"
