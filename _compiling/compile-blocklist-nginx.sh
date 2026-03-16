@@ -44,13 +44,15 @@ echo "Creating blocklist. Please hold."
         local list="$1"
         local num="$2"
         local placeholder="$3"
+        local LIST
         local tmp
-        tmp=$(mktemp) 
+        LIST=$(mktemp)
+        tmp=$(mktemp)
         
         sort "$list" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     $num;" >> "$tmp"; done
-        LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
-        sed_i "s|$placeholder|$LIST|g" "$TempFile"
-        rm "$tmp"
+        while IFS= read -r line; do echo "$line" >> "$LIST"; done < "$tmp"
+        sed "/$placeholder/r $LIST" "$TempFile" | sed "/$placeholder/d" > "$TempFile.new" && mv "$TempFile.new" "$TempFile"
+        rm "$tmp" "$LIST"
     }
     ###
     ### IPs
@@ -62,14 +64,17 @@ echo "Creating blocklist. Please hold."
         tmp=$(mktemp)
 
         sort -u "$list" | while IFS= read -r line; do echo "$line   $num;" >> "$tmp"; done
-        sed_i "/$placeholder/r $tmp" "$TempFile"; sed_i "/$placeholder/d" "$TempFile"
+        sed "/$placeholder/r $tmp" "$TempFile" | sed "/$placeholder/d" > "$TempFile.new" && mv "$TempFile.new" "$TempFile"
         rm "$tmp"
     }
     generate_list_ips_wp() {
         local list="$1"
         local placeholder="$2"
+        local tmp
+        tmp=$(mktemp)
 
-        sed_i "/$placeholder/r $list" "$TempFile"; sed_i "/$placeholder/d" "$TempFile"
+        cat "$list" > "$tmp"
+        sed "/$placeholder/r $tmp" "$TempFile" | sed "/$placeholder/d" > "$TempFile.new" && mv "$TempFile.new" "$TempFile"
     }
     ###
 ###################################################
