@@ -15,6 +15,10 @@
 git checkout borestad
 ####
 
+#### sed -i mac & linux cross compatibility
+sed_i() { if [[ "$OSTYPE" == "darwin"* ]]; then sed -i '' "$@"; else sed -i "$@"; fi }
+####
+
 echo "Creating blocklist. Please hold."
 
 ### File variables
@@ -45,7 +49,7 @@ echo "Creating blocklist. Please hold."
         
         sort "$list" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     $num;" >> "$tmp"; done
         LIST=""; while IFS= read -r line; do LIST+="$(echo "$line" | sed 's/[\/&]/\\&/g')\n"; done < "$tmp"; LIST=${LIST%\\n}
-        sed -i '' "s|$placeholder|$LIST|g" "$TempFile"
+        sed_i "s|$placeholder|$LIST|g" "$TempFile"
         rm "$tmp"
     }
     ###
@@ -58,14 +62,14 @@ echo "Creating blocklist. Please hold."
         tmp=$(mktemp)
 
         sort -u "$list" | while IFS= read -r line; do echo "$line   $num;" >> "$tmp"; done
-        sed -i '' "/$placeholder/r $tmp" "$TempFile"; sed -i '' "/$placeholder/d" "$TempFile"
+        sed_i "/$placeholder/r $tmp" "$TempFile"; sed_i "/$placeholder/d" "$TempFile"
         rm "$tmp"
     }
     generate_list_ips_wp() {
         local list="$1"
         local placeholder="$2"
 
-        sed -i '' "/$placeholder/r $list" "$TempFile"; sed -i '' "/$placeholder/d" "$TempFile"
+        sed_i "/$placeholder/r $list" "$TempFile"; sed_i "/$placeholder/d" "$TempFile"
     }
     ###
 ###################################################
@@ -129,13 +133,13 @@ echo "Creating blocklist. Please hold."
     BAD_REFERRERS=$(wc -l < $BadReferrers | xargs); BAD_BOTS=$(wc -l < $BadBots | xargs)
     #####
     ### Version:
-    sed -i '' "s|!!!!build-version-here!!!!|$MY_GIT_TAG|g" "$TempFile"
+    sed_i "s|!!!!build-version-here!!!!|$MY_GIT_TAG|g" "$TempFile"
     ### Updated:
-    sed -i '' "s|!!!!update-timedate-here!!!!|$_now|g" "$TempFile"
+    sed_i "s|!!!!update-timedate-here!!!!|$_now|g" "$TempFile"
     ### Bad Referrers Count:
-    sed -i '' "s|!!!!bad-referrer-count-here!!!!|$BAD_REFERRERS|g" "$TempFile"
+    sed_i "s|!!!!bad-referrer-count-here!!!!|$BAD_REFERRERS|g" "$TempFile"
     ### Bad Bot Count:
-    sed -i '' "s|!!!!bad-bot-count-here!!!!|$BAD_BOTS|g" "$TempFile"
+    sed_i "s|!!!!bad-bot-count-here!!!!|$BAD_BOTS|g" "$TempFile"
     ##### Update build file
     echo "$thisbuild" > "$BuildFile"
 ###################################################
