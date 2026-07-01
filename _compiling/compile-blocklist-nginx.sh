@@ -49,7 +49,11 @@ echo "Creating blocklist. Please hold."
         LIST=$(mktemp)
         tmp=$(mktemp)
         
-        sort "$list" | while IFS= read -r line; do escaped_line=${line//./\\.}; echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     $num;" >> "$tmp"; done
+        sort "$list" | while IFS= read -r line; do
+          local i ch prev; escaped_line=""; prev=""
+          for (( i=0; i<${#line}; i++ )); do ch="${line:i:1}"; if [[ "$ch" == "." && "$prev" != "\\" ]]; then escaped_line+='\.'; else escaped_line+="$ch"; fi; prev="$ch"; done
+          echo "\"~*(?:\\b)$escaped_line(?:\\b)\"     $num;" >> "$tmp"
+        done
         while IFS= read -r line; do echo "$line" >> "$LIST"; done < "$tmp"
         sed "/$placeholder/r $LIST" "$TempFile" | sed "/$placeholder/d" > "$TempFile.new" && mv "$TempFile.new" "$TempFile"
         rm "$tmp" "$LIST"
